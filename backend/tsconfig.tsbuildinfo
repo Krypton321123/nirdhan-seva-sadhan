@@ -1,0 +1,1 @@
+{"root":["./src/app.ts","./src/index.ts","./src/controllers/admincontroller.ts","./src/db/connectmongo.ts","./src/models/adminmodel.ts","./src/routes/adminrouter.ts","./src/utils/apierror.ts","./src/utils/apiresponse.ts","./src/utils/asynchandler.ts","./src/utils/isempty.ts"],"version":"5.6.3"}
