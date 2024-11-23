@@ -4,7 +4,9 @@ export interface campaignSchemaInterface extends mongoose.Document {
     name: string, 
     goal: number, 
     raised?: number, 
+    description: string, 
     createdBy: mongoose.Schema.Types.ObjectId, 
+    imageURL: string
 }
 
 const campaignSchema = new mongoose.Schema<campaignSchemaInterface>({
@@ -19,10 +21,17 @@ const campaignSchema = new mongoose.Schema<campaignSchemaInterface>({
         type: Number, 
         required: true, 
     }, 
+    description: {
+        type: String, 
+        required: true
+    }, 
     raised: {
         type: Number, 
         default: 0,  
     }, 
+    imageURL: {
+        type: String, 
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'Admins', 
