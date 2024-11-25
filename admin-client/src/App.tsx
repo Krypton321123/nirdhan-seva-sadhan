@@ -7,6 +7,7 @@ import AddBlog from "./pages/AddBlog.js"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoute.js"
+import AddGalleryImage from "./pages/AddGalleryImage.js"
 
 
 function App() {
@@ -16,9 +17,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />}/> 
-          <Route path="/test" element={<Sidebar><Dashboard /></Sidebar>} />
-          <Route path="/add-campaign" element={<Sidebar><AddCampaign /></Sidebar>} />
+          <Route path="/test" element={<ProtectedRoute><Sidebar><Dashboard /></Sidebar></ProtectedRoute>} />
+          <Route path="/add-campaign" element={<ProtectedRoute><Sidebar><AddCampaign /></Sidebar></ProtectedRoute>} />
           <Route path="/add-blog" element={<ProtectedRoute><Sidebar><AddBlog /></Sidebar></ProtectedRoute>} />
+          <Route path="/add-gallery-image" element={<ProtectedRoute><Sidebar><AddGalleryImage /></Sidebar></ProtectedRoute>} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

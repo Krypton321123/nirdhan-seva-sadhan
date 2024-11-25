@@ -2,6 +2,77 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { backendurl } from "../constants";
+import Modal from "../components/CampaignPage/Modal";
+
+const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({ campaignName, onClose }) => {
+  const [amount, setAmount] = useState("");
+  const [name, setName] = useState("");
+  const [mobile, setMobile] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!amount || !name) {
+      alert("Please fill in the required fields.");
+      return;
+    }
+    console.log("Donation Data:", { amount, name, mobile });
+    alert(`Thank you, ${name}, for donating INR ${amount}!`);
+    onClose(); // Close the modal after submission
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Donate to {campaignName}</h2>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-medium mb-2">Amount (INR)</label>
+        <input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+          className="w-full border rounded-lg px-3 py-2"
+          placeholder="Enter amount"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-medium mb-2">Name</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="w-full border rounded-lg px-3 py-2"
+          placeholder="Enter your name"
+        />
+      </div>
+      <div className="mb-4">
+        <label className="block text-gray-700 font-medium mb-2">Mobile Number (Optional)</label>
+        <input
+          type="tel"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
+          className="w-full border rounded-lg px-3 py-2"
+          placeholder="Enter mobile number"
+        />
+      </div>
+      <div className="flex justify-end space-x-4">
+        <button
+          type="button"
+          onClick={onClose}
+          className="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+        >
+          Donate
+        </button>
+      </div>
+    </form>
+  );
+};
 
 const ProgressBar: React.FC<{ raised: number; goal: number }> = ({ raised, goal }) => {
   const progress = (raised / goal) * 100;
@@ -91,6 +162,11 @@ const CampaignPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+  
   useEffect(() => {
     const fetchCampaign = async () => {
       try {
@@ -144,13 +220,23 @@ const CampaignPage: React.FC = () => {
             </div>
             <ProgressBar raised={campaign.raised} goal={campaign.goal} />
           </div>
-          <a
-            href="#donate"
-            className="inline-block bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition mt-8"
-          >
-            Donate Now
-          </a>
-        </div>
+
+
+          {/* Donate Now Button */}
+      <div className="text-center my-8">
+        <button
+          onClick={handleOpenModal}
+          className="bg-green-500 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition"
+        >
+          Donate Now
+        </button>
+      </div>
+
+      {/* Modal with Donation Form */}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <DonationForm campaignName="Example Campaign" onClose={handleCloseModal} />
+      </Modal>
+    </div>
       </section>
 
       {/* FAQ Section */}

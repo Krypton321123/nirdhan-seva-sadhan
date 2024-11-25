@@ -8,9 +8,9 @@ import { backendurl } from "../../constants";
 import axios from "axios";
 
 const causes = [
-  { title: "Helping Those in Need", description: "Providing resources to improve lives.", image: causes1, link: "#" },
-  { title: "Building Better Futures", description: "Creating opportunities for growth.", image: causes2, link: "#" },
-  { title: "Ensuring Food Security", description: "Helping people with food supplies.", image: causes3, link: "#" },
+  { title: "Helping Those in Need", description: "Providing resources to improve lives.", image: causes1, link: "/aboutus" },
+  { title: "Building Better Futures", description: "Creating opportunities for growth.", image: causes2, link: "/aboutus" },
+  { title: "Ensuring Food Security", description: "Helping people with food supplies.", image: causes3, link: "/aboutus" },
 ];
 
 
@@ -63,8 +63,8 @@ const HeroWithOverlay: React.FC = () => {
                   Donate Now
                 </button>
                 <a
-                  href="#learn-more"
-                  className="bg-white text-green-700 px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition-all transform hover:scale-105 text-lg font-medium mt-3 lg:mt-0"
+                  href="/aboutus"
+                  className="bg-white text-center text-green-700 px-6 py-3 rounded-full shadow-lg hover:bg-gray-200 transition-all transform hover:scale-105 text-lg font-medium mt-3 lg:mt-0"
                 >
                   Learn More
                 </a>

@@ -14,6 +14,8 @@ import jsonwebtoken from "jsonwebtoken";
 import { v2 as cloudinary } from "cloudinary";
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
+import { galleryModel } from "../models/galleryModel.js";
+import { GallerySchemaInterface } from "../models/galleryModel.js";
 
 dotenv.config()
 
@@ -218,9 +220,75 @@ const verifyUser = asyncHandler(
   }
 );
 
+
+const addGalleryImageController = asyncHandler(
+  async (req: RequestWithAdmin, res: Response) => {
+    const admin: any = req.admin; 
+    const { description } = req.body; 
+    const file = req.file; 
+
+    // Validate inputs
+    if (isEmpty(description)) {
+      return res
+        .status(400)
+        .json(new ApiError(400, "Description is required."));
+    }
+
+    if (!file) {
+      return res.status(400).json(new ApiError(400, "Image is required."));
+    }
+
+    try {
+      const imagePath = path.join(__dirname, "../../uploads", file.filename);
+
+      if (!fs.existsSync(imagePath)) {
+        return res.status(400).json(new ApiError(400, "Image file not found."));
+      }
+
+      const result = await cloudinary.uploader.upload(imagePath, {
+        folder: "gallery_images",
+      });
+
+      const imageUrl = result.secure_url;
+
+      
+      fs.unlink(imagePath, (err) => {
+        if (err) {
+          console.error("Error deleting local file:", err);
+        } else {
+          console.log("Local file deleted successfully.");
+        }
+      });
+
+      
+      const newGalleryImage = new galleryModel({
+        imageURL: imageUrl, 
+        description: description, 
+      });
+
+      const savedGalleryImage = await newGalleryImage.save();
+
+      return res.status(201).json(
+        new ApiResponse(
+          201,
+          savedGalleryImage,
+          "Gallery image added successfully."
+        )
+      );
+    } catch (error: any) {
+      console.error("Error uploading gallery image:", error);
+      return res
+        .status(500)
+        .json(new ApiError(500, "Internal Server Error", error));
+    }
+  }
+);
+
+
 export {
   adminLoginController,
   adminCreateCampaignController,
   adminCreateBlogController,
   verifyUser,
+  addGalleryImageController
 };

@@ -1,31 +1,8 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
-
-// Sample Story Data
-const stories = [
-  {
-    title: "Making a Difference in Education",
-    description:
-      "Learn about how our initiatives are helping children get access to quality education. Learn about how our initiatives are helping children get access to quality education. Learn about how our initiatives are helping children get access to quality education. Learn about how our initiatives are helping children get access to quality education. ",
-    image: "https://via.placeholder.com/800x500",
-    link: "#",
-  },
-  {
-    title: "Food Drives Across the Nation",
-    description:
-      "Our teams are distributing food supplies to those in need, nationwide.",
-    image: "https://via.placeholder.com/800x500",
-    link: "#",
-  },
-  {
-    title: "Volunteering for a Cause",
-    description:
-      "Discover how volunteering is creating impact in communities and bringing change.",
-    image: "https://via.placeholder.com/800x500",
-    link: "#",
-  },
-  // Add more stories here if needed
-];
+import { backendurl } from "../../constants";
 
 // Next arrow
 function SampleNextArrow(props: any) {
@@ -74,6 +51,10 @@ function SamplePrevArrow(props: any) {
 }
 
 const LatestStoriesSlider: React.FC = () => {
+
+  const [latestBlogs, setLatestBlogs] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+
   const settings = {
     infinite: true,
     speed: 500,
@@ -82,8 +63,8 @@ const LatestStoriesSlider: React.FC = () => {
     centerMode: true, // Center the active card
     focusOnSelect: true, // Focus on selected card
     arrows: true, // Show previous/next arrows
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />,
+    nextArrow: <SampleNextArrow className="hidden lg:block" />,
+    prevArrow: <SamplePrevArrow className="hidden lg:block" />,
     responsive: [
       {
         breakpoint: 1024, // Tablets
@@ -102,6 +83,23 @@ const LatestStoriesSlider: React.FC = () => {
     ],
   };
 
+  useEffect(() => {
+    const fetchLatestBlogs = async () => {
+      try {
+        const response = await axios.get(`${backendurl}/blogs/latest`); // Replace with your actual backend URL
+        setLatestBlogs(response.data.data); // Assuming the response data is in `data`
+      } catch (err) {
+        setError("Failed to load the latest blogs.");
+      }
+    };
+
+    fetchLatestBlogs();
+  }, []);
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <section className="py-16 lg:py-24 bg-gray-50 w-full">
       <div className="container mx-auto px-4 text-center relative">
@@ -110,28 +108,35 @@ const LatestStoriesSlider: React.FC = () => {
         </h2>
 
         <Slider {...settings}>
-          {stories.map((story, index) => (
+          {latestBlogs.map((blog: any, index: number) => (
             <div key={index} className="px-4">
               <div className="bg-gray-100 p-6 rounded-lg shadow-lg flex flex-col lg:flex-row relative">
                 {/* Text Content on Left */}
                 <div className="flex-1 mb-4 lg:mb-0 lg:mr-4">
                   <h3 className="text-2xl font-semibold text-gray-800 mb-2">
-                    {story.title}
+                    {blog.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-lg">{story.description}</p>
-                  <a
-                    href={story.link}
+                  <p className="text-gray-600 mb-4 text-lg">
+                    {/* Render description as HTML */}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: blog.content.slice(0, 100) + "..."
+                      }}
+                    />
+                  </p>
+                  <Link
+                    to={`/`}
                     className="inline-block py-2 px-4 text-center text-white bg-green-500 rounded-lg hover:bg-green-700 transition absolute bottom-4 left-4"
                   >
                     Read More
-                  </a>
+                  </Link>
                 </div>
 
                 {/* Image on Right */}
-                <div className="lg:w-1/2 h-[300px] lg:h-full">
+                <div className="lg:w-1/2 h-[300px] lg:h-[500px]">
                   <img
-                    src={story.image}
-                    alt={story.title}
+                    src={blog.imageURL || "https://via.placeholder.com/800x500"} // Use a placeholder if no image is available
+                    alt={blog.title}
                     className="w-full h-full object-cover rounded-lg"
                   />
                 </div>

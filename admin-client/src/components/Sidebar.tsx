@@ -81,6 +81,28 @@ const Sidebar = ({ children }: sidebar) => {
               &nbsp;&nbsp;Add blog
             </button>
             </Link>
+            
+          </div>
+          <div className="w-[20rem] h-[4rem] flex justify-center items-center">
+            <Link to={"/add-gallery-image"}>
+            <button className="cursor-pointer flex hover:opacity-50 rounded-lg items-center text-white border-2 p-2 w-[15rem] h-[3rem]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+              &nbsp;&nbsp;Add Gallery Image
+            </button>
+            </Link>
           </div>
         </div>
       </div>

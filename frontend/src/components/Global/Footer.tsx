@@ -1,5 +1,5 @@
-import React from 'react';
-import finalLogo from '../../assets/logo-final.png'
+import React from "react";
+import finalLogo from "../../assets/logo-final.png";
 
 interface FooterProps {
   children?: React.ReactNode;
@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
     <div className="relative">
       {/* Render children above the footer */}
       <div className="mb-16">{children}</div>
-      
+
       {/* Footer Section */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
@@ -24,7 +24,8 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
                 className="w-32 h-32 object-cover mb-4"
               />
               <p className="text-sm text-gray-400">
-                Our mission is to create a better world by helping communities and causes that matter.
+                Our mission is to create a better world by helping communities
+                and causes that matter.
               </p>
             </div>
 
@@ -32,10 +33,26 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul>
-                <li><a href="#" className="hover:text-green-500">About Us</a></li>
-                <li><a href="#" className="hover:text-green-500">Contact</a></li>
-                <li><a href="#" className="hover:text-green-500">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-green-500">Privacy Policy</a></li>
+                <li>
+                  <a href="#" className="hover:text-green-500">
+                    About Us
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-green-500">
+                    Contact
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-green-500">
+                    Terms of Service
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-green-500">
+                    Privacy Policy
+                  </a>
+                </li>
               </ul>
             </div>
 
@@ -45,30 +62,49 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
               <div className="flex space-x-6">
                 {/* Facebook SVG */}
                 <a href="#" className="text-xl hover:text-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" id="facebook">
-                    <path fill="#1877f2" d="M1024,512C1024,229.23016,794.76978,0,512,0S0,229.23016,0,512c0,255.554,187.231,467.37012,432,505.77777V660H302V512H432V399.2C432,270.87982,508.43854,200,625.38922,200,681.40765,200,740,210,740,210V336H675.43713C611.83508,336,592,375.46667,592,415.95728V512H734L711.3,660H592v357.77777C836.769,979.37012,1024,767.554,1024,512Z"></path>
-                    <path fill="#fff" d="M711.3,660,734,512H592V415.95728C592,375.46667,611.83508,336,675.43713,336H740V210s-58.59235-10-114.61078-10C508.43854,200,432,270.87982,432,399.2V512H302V660H432v357.77777a517.39619,517.39619,0,0,0,160,0V660Z"></path>
-                </svg>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M22.675 0H1.325C.593 0 0 .593 0 1.326v21.348C0 23.406.593 24 1.325 24H12.81v-9.294H9.692V11.24h3.118V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.465.099 2.796.144v3.24h-1.918c-1.507 0-1.799.717-1.799 1.767v2.318h3.594l-.468 3.465h-3.126V24h6.126c.732 0 1.325-.593 1.325-1.326V1.326C24 .593 23.406 0 22.675 0z" />
+                  </svg>
                 </a>
 
                 {/* YouTube SVG */}
                 <a href="#" className="text-xl hover:text-green-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-youtube" viewBox="0 0 16 16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.995 2.908 7.34 6.747 7.832V10H4v-2h2.747V6.65c0-2.66 1.537-4.15 4.026-4.15 1.181 0 2.384.087 2.637.126v2.69h-1.82c-1.426 0-1.857.689-1.857 1.716v2.253h3.375l-.44 2h-2.935V15.83C13.092 15.34 16 11.995 16 8c0-4.42-3.58-8-8-8z"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-red-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23.498 6.186a2.956 2.956 0 00-2.08-2.086C19.378 3.586 12 3.586 12 3.586s-7.378 0-9.418.514a2.956 2.956 0 00-2.08 2.086A30.37 30.37 0 000 11.999a30.37 30.37 0 00.502 5.814 2.956 2.956 0 002.08 2.086c2.04.514 9.418.514 9.418.514s7.378 0 9.418-.514a2.956 2.956 0 002.08-2.086A30.37 30.37 0 0024 11.999a30.37 30.37 0 00-.502-5.813zM9.546 15.568V8.431L15.818 12l-6.272 3.568z" />
                   </svg>
                 </a>
 
                 {/* Instagram SVG */}
                 <a href="#" className="text-xl hover:text-green-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-instagram" viewBox="0 0 16 16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.995 2.908 7.34 6.747 7.832V10H4v-2h2.747V6.65c0-2.66 1.537-4.15 4.026-4.15 1.181 0 2.384.087 2.637.126v2.69h-1.82c-1.426 0-1.857.689-1.857 1.716v2.253h3.375l-.44 2h-2.935V15.83C13.092 15.34 16 11.995 16 8c0-4.42-3.58-8-8-8z"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-400"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M23.954 4.569a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.09 10.09 0 01-3.184 1.213 4.92 4.92 0 00-8.384 4.482A13.97 13.97 0 011.671 3.149a4.822 4.822 0 001.523 6.573 4.902 4.902 0 01-2.229-.616v.061a4.936 4.936 0 003.946 4.827 4.996 4.996 0 01-2.224.085 4.937 4.937 0 004.604 3.419A9.867 9.867 0 010 21.542a13.936 13.936 0 007.548 2.212c9.05 0 14-7.496 14-13.986 0-.209 0-.42-.015-.63A9.936 9.936 0 0024 4.59z" />
                   </svg>
                 </a>
 
                 {/* Twitter SVG */}
                 <a href="#" className="text-xl hover:text-green-500">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-twitter" viewBox="0 0 16 16">
-                    <path d="M5.026 15c6.03 0 9.335-5 9.335-9.335 0-.14 0-.28-.009-.42A6.693 6.693 0 0 0 16 3.539a6.566 6.566 0 0 1-1.889.516A3.333 3.333 0 0 0 15.557 2a6.608 6.608 0 0 1-2.097.799A3.3 3.3 0 0 0 11.392.4a3.39 3.39 0 0 0-2.487 1.082A3.336 3.336 0 0 0 6.75 3.292a9.447 9.447 0 0 1-6.857-3.475A3.317 3.317 0 0 0 2.9 5.352a3.3 3.3 0 0 0 1.457-.402A3.336 3.336 0 0 0 1.24 7.9a3.332 3.332 0 0 0 1.66 2.866A6.64 6.64 0 0 1 .8 10.69a9.497 9.497 0 0 0 5.226 1.524z"/>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-pink-600"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.337 3.608 1.311.975.975 1.249 2.242 1.31 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.337 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.31-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.337-3.608-1.311-.975-.975-1.249-2.242-1.31-3.608-.058-1.265-.07-1.645-.07-4.849s.012-3.584.07-4.849c.062-1.366.337-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.31C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.332.015 7.052.072 5.773.129 4.643.397 3.643 1.396 2.644 2.396 2.376 3.526 2.319 4.805 2.261 6.084 2.246 6.493 2.246 12c0 5.507.015 5.916.072 7.195.057 1.279.324 2.409 1.324 3.409 1 1 2.13 1.268 3.409 1.324 1.279.057 1.688.072 7.195.072s5.916-.015 7.195-.072c1.279-.057 2.409-.324 3.409-1.324 1-1 1.268-2.13 1.324-3.409.057-1.279.072-1.688.072-7.195s-.015-5.916-.072-7.195c-.057-1.279-.324-2.409-1.324-3.409-1-1-2.13-1.268-3.409-1.324C17.916.015 17.507 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.838 3.838 0 110-7.676 3.838 3.838 0 010 7.676zm6.406-11.845a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
                   </svg>
                 </a>
               </div>

@@ -43,7 +43,9 @@ const CampaignsPage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen py-16 px-4 lg:px-8">
       <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">Our Campaigns</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
+          Our Campaigns
+        </h1>
 
         {loading && <div className="text-center">Loading...</div>}
         {error && <div className="text-center text-red-500">{error}</div>}
@@ -57,11 +59,22 @@ const CampaignsPage: React.FC = () => {
                   key={campaign._id}
                   className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition"
                 >
-                  <h2 className="text-xl font-bold text-gray-800 mb-2">{campaign.name}</h2>
+                  <div className="mb-4">
+                    <img
+                      src={campaign.imageURL}
+                      alt={campaign.name}
+                      className="w-full h-48 object-cover rounded-lg"
+                    />
+                  </div>
+                  <h2 className="text-xl font-bold text-gray-800 mb-2">
+                    {campaign.name}
+                  </h2>
                   <div
                     className="text-gray-600 mb-4"
                     dangerouslySetInnerHTML={{
-                      __html: sanitizeHTML(campaign.description.slice(0, 100) + "..."),
+                      __html: sanitizeHTML(
+                        campaign.description.slice(0, 100) + "..."
+                      ),
                     }}
                   ></div>
                   <div className="mb-4">
@@ -71,7 +84,9 @@ const CampaignsPage: React.FC = () => {
                     <div className="w-full bg-gray-200 rounded-full h-4 mt-2">
                       <div
                         className="bg-green-500 h-4 rounded-full"
-                        style={{ width: `${(campaign.raised / campaign.goal) * 100}%` }}
+                        style={{
+                          width: `${(campaign.raised / campaign.goal) * 100}%`,
+                        }}
                       ></div>
                     </div>
                   </div>
@@ -90,7 +105,9 @@ const CampaignsPage: React.FC = () => {
               <button
                 onClick={() => handlePageChange(page - 1)}
                 disabled={page === 1}
-                className={`px-4 py-2 rounded-lg ${page === 1 ? "bg-gray-300" : "bg-green-500 text-white"}`}
+                className={`px-4 py-2 rounded-lg ${
+                  page === 1 ? "bg-gray-300" : "bg-green-500 text-white"
+                }`}
               >
                 Previous
               </button>
@@ -101,7 +118,9 @@ const CampaignsPage: React.FC = () => {
                 onClick={() => handlePageChange(page + 1)}
                 disabled={page === totalPages}
                 className={`px-4 py-2 rounded-lg ${
-                  page === totalPages ? "bg-gray-300" : "bg-green-500 text-white"
+                  page === totalPages
+                    ? "bg-gray-300"
+                    : "bg-green-500 text-white"
                 }`}
               >
                 Next
