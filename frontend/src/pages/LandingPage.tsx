@@ -8,7 +8,7 @@ import CampaignsPageSection from "../components/LandingPage/Campaigns";
 
 const LandingPage: React.FC = () => {
   return (
-    <div>
+    <div className="w-full">
       <HeroWithOverlay />
 
       <LatestStoriesSlider />
