@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { backendurl } from "../constants";
 import axios from "axios";
 
 const Gallery = () => {

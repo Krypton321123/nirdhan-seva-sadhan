@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { backendurl } from "../constants";
 
 const BlogPage: React.FC = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
