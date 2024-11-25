@@ -1,6 +1,7 @@
 import { ChangeEvent, MouseEvent, useMemo, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import { toast } from "react-toastify";
+
 import axios from "axios";
 
 const AddBlog = () => {
@@ -21,6 +22,7 @@ const AddBlog = () => {
   };
 
   const handleSubmit = async (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault()
     if (!content.trim() || !title.trim() || !image) {
       toast("Please fill all fields, including the image.");
       return;
@@ -40,7 +42,7 @@ const AddBlog = () => {
 
       if (response.status === 200) {
         toast.success("Your blog has been created");
-        setTitle(prev => "")
+        setTitle("")
         setContent("")
         setImage(null)
       } else {
