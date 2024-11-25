@@ -25,7 +25,6 @@ const WriteToUsSection: React.FC = () => {
       return;
     }
     setError('');
-    // handle form submission logic here (e.g., send to API or email)
     console.log('Form submitted:', formData);
   };
 
@@ -37,7 +36,7 @@ const WriteToUsSection: React.FC = () => {
         </h2>
 
         <div className="bg-white p-8 rounded-lg shadow-md max-w-4xl mx-auto">
-          {/* Form */}
+         
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
               <div className="text-red-500 mb-4">
@@ -46,7 +45,7 @@ const WriteToUsSection: React.FC = () => {
             )}
 
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* Name */}
+              
               <div className="flex-1">
                 <label htmlFor="name" className="text-sm font-semibold text-gray-600">Name</label>
                 <input
@@ -60,7 +59,7 @@ const WriteToUsSection: React.FC = () => {
                 />
               </div>
 
-              {/* Email */}
+            
               <div className="flex-1">
                 <label htmlFor="email" className="text-sm font-semibold text-gray-600 mb-2">Email</label>
                 <input
@@ -75,7 +74,7 @@ const WriteToUsSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Subject */}
+          
             <div>
               <label htmlFor="subject" className="text-sm font-semibold text-gray-600">Subject</label>
               <input
@@ -89,7 +88,7 @@ const WriteToUsSection: React.FC = () => {
               />
             </div>
 
-            {/* Message */}
+           
             <div>
               <label htmlFor="message" className="text-sm font-semibold text-gray-600">Message</label>
               <textarea
@@ -103,7 +102,7 @@ const WriteToUsSection: React.FC = () => {
               />
             </div>
 
-            {/* Submit Button */}
+          
             <div>
               <button
                 type="submit"

@@ -13,6 +13,7 @@ import Gallery from './pages/Gallery';
 
 
 const App = () => {
+  console.log(import.meta.env.VITE_APP_API_URL)
   return (
     <>
       <Router>

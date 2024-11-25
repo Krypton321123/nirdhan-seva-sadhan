@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Slider from "react-slick";
-import { backendurl } from "../../constants";
+// import { backendurl } from "../../constants";
 
 // Next arrow
 function SampleNextArrow(props: any) {
@@ -86,8 +86,8 @@ const LatestStoriesSlider: React.FC = () => {
   useEffect(() => {
     const fetchLatestBlogs = async () => {
       try {
-        const response = await axios.get(`${backendurl}/blogs/latest`); // Replace with your actual backend URL
-        setLatestBlogs(response.data.data); // Assuming the response data is in `data`
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/blogs/latest`); 
+        setLatestBlogs(response.data.data); 
       } catch (err) {
         setError("Failed to load the latest blogs.");
       }
@@ -111,13 +111,13 @@ const LatestStoriesSlider: React.FC = () => {
           {latestBlogs.map((blog: any, index: number) => (
             <div key={index} className="px-4">
               <div className="bg-gray-100 p-6 rounded-lg shadow-lg flex flex-col lg:flex-row relative">
-                {/* Text Content on Left */}
+                
                 <div className="flex-1 mb-4 lg:mb-0 lg:mr-4">
                   <h3 className="text-2xl font-semibold text-gray-800 mb-2">
                     {blog.title}
                   </h3>
                   <p className="text-gray-600 mb-4 text-lg">
-                    {/* Render description as HTML */}
+                   
                     <span
                       dangerouslySetInnerHTML={{
                         __html: blog.content.slice(0, 100) + "..."
@@ -132,7 +132,7 @@ const LatestStoriesSlider: React.FC = () => {
                   </Link>
                 </div>
 
-                {/* Image on Right */}
+               
                 <div className="lg:w-1/2 h-[300px] lg:h-[500px]">
                   <img
                     src={blog.imageURL || "https://via.placeholder.com/800x500"} // Use a placeholder if no image is available

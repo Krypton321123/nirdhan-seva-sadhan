@@ -5,7 +5,7 @@ const JoinUs: React.FC = () => {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4 lg:px-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl w-full">
-        {/* Left Section */}
+     
         <div className="space-y-6">
           <h1 className="text-5xl font-bold leading-snug">
             YOUR FIRST <span className="text-green-600">STEP</span>, <br />
@@ -22,13 +22,13 @@ const JoinUs: React.FC = () => {
           
         </div>
 
-        {/* Right Section */}
+       
         <div className="bg-gray-50 p-8 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold mb-6">
             REGISTRATION <span className="text-green-600">FORM</span>
           </h2>
           <form className="space-y-4">
-            {/* Name */}
+         
             <div>
               <label className="block text-sm font-semibold mb-1" htmlFor="name">
                 NAME
@@ -41,7 +41,7 @@ const JoinUs: React.FC = () => {
               />
             </div>
 
-            {/* Phone */}
+      
             <div>
               <label className="block text-sm font-semibold mb-1" htmlFor="phone">
                 PHONE
@@ -54,7 +54,7 @@ const JoinUs: React.FC = () => {
               />
             </div>
 
-            {/* Email */}
+        
             <div>
               <label className="block text-sm font-semibold mb-1" htmlFor="email">
                 E-mail
@@ -67,7 +67,7 @@ const JoinUs: React.FC = () => {
               />
             </div>
 
-            {/* Address */}
+      
             <div>
               <label className="block text-sm font-semibold mb-1" htmlFor="address">
                 Address
@@ -80,7 +80,7 @@ const JoinUs: React.FC = () => {
               />
             </div>
 
-            {/* Purpose */}
+           
             <div>
               <label
                 className="block text-sm font-semibold mb-1"
@@ -96,7 +96,7 @@ const JoinUs: React.FC = () => {
               />
             </div>
 
-            {/* Submit Button */}
+            
             <button
               type="submit"
               className="w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition"

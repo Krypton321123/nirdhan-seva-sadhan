@@ -2,7 +2,7 @@ import React from "react";
 import CountUp from 'react-countup';
 import impact1 from '../../assets/causes-2.jpeg'
 import impact2 from '../../assets/impact-2.jpeg'
-// Stat data
+
 const stats = [
   {
     title: "Volunteers",
@@ -31,7 +31,7 @@ const OurImpactSection: React.FC = () => {
     <section className="bg-gray-100 py-16 lg:mb-15">
       <h2 className="text-4xl font-semibold  text-center mb-16 lg:mb-12">Our <span className="text-green-500">Impact</span></h2>
 
-      {/* Top Section with Images and Central Stat */}
+    
       <div className="container mx-auto px-4 text-center flex flex-col lg:flex-row items-center justify-between mb-12">
         <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
           <img
@@ -58,7 +58,7 @@ const OurImpactSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Section with Stat Cards */}
+    
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (

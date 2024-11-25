@@ -11,7 +11,7 @@ const AboutUs: React.FC = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      {/* Hero Section */}
+   
       <section className="bg-green-500 text-white text-center py-16 px-4">
         <div className="container mx-auto">
           <h1 className="text-4xl font-bold">About Us</h1>
@@ -21,7 +21,7 @@ const AboutUs: React.FC = () => {
         </div>
       </section>
 
-      {/* Goals Section */}
+   
       <section className="py-16 px-4 lg:px-8 bg-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl lg:text-4xl font-semibold text-gray-800 mb-4">
@@ -56,7 +56,7 @@ const AboutUs: React.FC = () => {
         </div>
       </section>
 
-      {/* Strategies Section */}
+      
       <section className="py-16 px-4 lg:px-8 bg-gray-50">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl lg:text-4xl font-semibold text-gray-800 mb-4">
@@ -91,7 +91,7 @@ const AboutUs: React.FC = () => {
         </div>
       </section>
 
-      {/* Team Section */}
+     
       <section className="py-16 px-4 lg:px-8 bg-white">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl lg:text-4xl font-semibold text-gray-800 mb-4">

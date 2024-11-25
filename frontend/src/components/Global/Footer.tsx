@@ -8,15 +8,15 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ children }) => {
   return (
     <div className="relative">
-      {/* Render children above the footer */}
+      
       <div className="mb-16">{children}</div>
 
-      {/* Footer Section */}
+      
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4">
-          {/* Footer Content Layout */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Logo and Description Section */}
+            
             <div className="flex flex-col items-start">
               <img
                 src={`${finalLogo}`} // Replace with actual logo
@@ -29,7 +29,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
               </p>
             </div>
 
-            {/* Quick Links Section */}
+          
             <div>
               <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
               <ul>
@@ -60,7 +60,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
             <div>
               <h3 className="text-lg font-semibold mb-4">Follow Us</h3>
               <div className="flex space-x-6">
-                {/* Facebook SVG */}
+                
                 <a href="#" className="text-xl hover:text-green-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,6 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
                   </svg>
                 </a>
 
-                {/* YouTube SVG */}
                 <a href="#" className="text-xl hover:text-green-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +83,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
                   </svg>
                 </a>
 
-                {/* Instagram SVG */}
+                
                 <a href="#" className="text-xl hover:text-green-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +95,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
                   </svg>
                 </a>
 
-                {/* Twitter SVG */}
+               
                 <a href="#" className="text-xl hover:text-green-500">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -111,7 +110,7 @@ const Footer: React.FC<FooterProps> = ({ children }) => {
             </div>
           </div>
 
-          {/* Copyright Section */}
+         
           <div className="text-center mt-12 text-sm text-gray-400">
             <p>&copy; 2024 Nirdhan Seva Sansthan. All rights reserved.</p>
           </div>

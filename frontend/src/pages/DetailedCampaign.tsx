@@ -171,7 +171,7 @@ const CampaignPage: React.FC = () => {
     const fetchCampaign = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`${backendurl}/campaign/getCampaignById/${id}`);
+        const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/campaign/getCampaignById/${id}`);
         setCampaign(response.data.data);
         setLoading(false);
       } catch (err) {
@@ -192,7 +192,7 @@ const CampaignPage: React.FC = () => {
 
   return (
     <div>
-      {/* Hero Section */}
+     
       <section
         className="relative bg-cover bg-center h-[400px] md:h-[500px]"
         style={{ backgroundImage: `url(${campaign.imageURL})` }}
@@ -203,7 +203,7 @@ const CampaignPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Campaign Details Section */}
+    
       <section className="py-16 px-4 lg:px-8 bg-gray-50">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl lg:text-4xl font-semibold text-gray-800 mb-4">About the Campaign</h2>
@@ -222,7 +222,7 @@ const CampaignPage: React.FC = () => {
           </div>
 
 
-          {/* Donate Now Button */}
+       
       <div className="text-center my-8">
         <button
           onClick={handleOpenModal}
@@ -232,14 +232,14 @@ const CampaignPage: React.FC = () => {
         </button>
       </div>
 
-      {/* Modal with Donation Form */}
+      
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
         <DonationForm campaignName="Example Campaign" onClose={handleCloseModal} />
       </Modal>
     </div>
       </section>
 
-      {/* FAQ Section */}
+      
       <FAQSection />
     </div>
   );

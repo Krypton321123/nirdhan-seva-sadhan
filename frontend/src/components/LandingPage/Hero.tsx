@@ -4,7 +4,7 @@ import causes1 from '../../assets/causes-1.jpg'
 import causes2 from '../../assets/causes-4.jpeg'
 import causes3 from '../../assets/causes-3.jpeg'
 import { useNavigate } from "react-router-dom";
-import { backendurl } from "../../constants";
+// import { backendurl } from "../../constants";
 import axios from "axios";
 
 const causes = [
@@ -22,7 +22,7 @@ const HeroWithOverlay: React.FC = () => {
 
   const handleDonateNow = async () => {
     try {
-      const response = await axios.get(`${backendurl}/campaign/getLatestCampaign`);
+      const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/campaign/getLatestCampaign`);
       const { data } = response.data;
       console.log(response.data.data[0])
 
@@ -39,7 +39,7 @@ const HeroWithOverlay: React.FC = () => {
 
   return (
     <div className="relative">
-      {/* Hero Section */}
+     
       <section
         className="relative bg-cover bg-center bg-no-repeat h-[80vh] lg:h-[90vh]"
         style={{
@@ -74,14 +74,13 @@ const HeroWithOverlay: React.FC = () => {
         </div>
       </section>
 
-      {/* Our Causes Section */}
+      
       <section className="relative w-full lg:w-[80%] mx-auto top-[-40px] lg:top-[-180px] bg-white shadow-lg rounded-lg py-8 px-6 lg:px-10 z-10">
-        {/* Title */}
+      
         <h2 className="text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-8">
           Our <span className="text-green-500">Causes</span>
         </h2>
 
-        {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {causes.map((cause, index) => (
             <div
@@ -89,13 +88,13 @@ const HeroWithOverlay: React.FC = () => {
               className="bg-white shadow-md rounded-lg overflow-hidden transition-transform hover:scale-105 border border-gray-200 cursor-pointer"
               onClick={() => window.open(cause.link, "_blank")}
             >
-              {/* Image */}
+              
               <img
                 src={cause.image}
                 alt={cause.title}
                 className="w-full h-48 object-cover"
               />
-              {/* Content */}
+             
               <div className="p-4">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
                   {cause.title}

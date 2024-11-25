@@ -15,7 +15,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
 import { galleryModel } from "../models/galleryModel.js";
-import { GallerySchemaInterface } from "../models/galleryModel.js";
+// import { GallerySchemaInterface } from "../models/galleryModel.js";
 
 dotenv.config()
 

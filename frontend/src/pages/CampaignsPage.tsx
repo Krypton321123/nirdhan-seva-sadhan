@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DOMPurify from "dompurify"; // Library to sanitize HTML
-import { backendurl } from "../constants";
+// import { backendurl } from "../constants";
 
 const CampaignsPage: React.FC = () => {
   const [campaigns, setCampaigns] = useState<any[]>([]);
@@ -14,7 +14,7 @@ const CampaignsPage: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${backendurl}/campaign/campaigns`, {
+      const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/campaign/campaigns`, {
         params: { page, limit: 6 },
       });
       const { campaigns, pagination } = response.data.data;
@@ -52,7 +52,7 @@ const CampaignsPage: React.FC = () => {
 
         {!loading && !error && (
           <>
-            {/* Campaigns Grid */}
+           
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {campaigns.map((campaign) => (
                 <div
@@ -100,7 +100,7 @@ const CampaignsPage: React.FC = () => {
               ))}
             </div>
 
-            {/* Pagination */}
+           
             <div className="flex justify-center items-center mt-8 space-x-4">
               <button
                 onClick={() => handlePageChange(page - 1)}

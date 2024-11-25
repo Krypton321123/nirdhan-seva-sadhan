@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { backendurl } from "../constants";
+// import { backendurl } from "../constants";
 
 const DetailedBlog: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,8 +11,8 @@ const DetailedBlog: React.FC = () => {
 
   const fetchBlogDetails = async () => {
     try {
-      const response = await axios.get(`${backendurl}/blogs/getDetailedBlog/${id}`);
-      setBlog(response.data.data.blog); // Correctly access the `blog` key in the response
+      const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/blogs/getDetailedBlog/${id}`);
+      setBlog(response.data.data.blog); 
     } catch (err) {
       setError("Failed to fetch blog details.");
     } finally {
@@ -38,7 +38,7 @@ const DetailedBlog: React.FC = () => {
 
   return (
     <div className="container mx-auto py-16 px-4">
-      {/* Blog Image */}
+     
       {blog.imageURL && (
         <div className="mb-8">
           <img
@@ -49,10 +49,10 @@ const DetailedBlog: React.FC = () => {
         </div>
       )}
 
-      {/* Blog Title */}
+     
       <h1 className="text-4xl font-bold text-gray-800 mb-4 text-center">{blog.title}</h1>
 
-      {/* Publish Date */}
+    
       <p className="text-gray-600 mb-6">
         Published on{" "}
         {new Date(blog.createdAt).toLocaleDateString("en-US", {
@@ -62,7 +62,7 @@ const DetailedBlog: React.FC = () => {
         })}
       </p>
 
-      {/* Blog Content */}
+     
       <div
         className="prose prose-lg max-w-none text-gray-800 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: blog.content }}

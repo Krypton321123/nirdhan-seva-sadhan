@@ -16,7 +16,7 @@ const BlogPage: React.FC = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${backendurl}/blogs/latestBlogs?page=${page}&limit=${blogsPerPage}`
+        `${import.meta.env.VITE_APP_API_URL}/blogs/latestBlogs?page=${page}&limit=${blogsPerPage}`
       );
       const { data, totalPages: total, currentPage: current } = response.data;
 
@@ -55,7 +55,7 @@ const BlogPage: React.FC = () => {
         Our <span className="text-green-500">Blogs</span>
       </h1>
 
-      {/* Latest Blog Section */}
+     
       {latestBlog && (
         <div className="mb-12 bg-gray-100 rounded-lg shadow-lg p-6 flex flex-col lg:flex-row">
           <div className="lg:w-1/2 h-[300px] mb-4 lg:mb-0 lg:mr-4">
@@ -82,7 +82,7 @@ const BlogPage: React.FC = () => {
         </div>
       )}
 
-      {/* All Blogs Section */}
+      
       {loading ? (
         <div className="text-center text-gray-600">Loading blogs...</div>
       ) : error ? (
@@ -118,7 +118,7 @@ const BlogPage: React.FC = () => {
         </div>
       )}
 
-      {/* Pagination */}
+   
       <div className="mt-8 flex justify-center items-center space-x-2">
         <button
           onClick={() => handlePageChange(currentPage - 1)}

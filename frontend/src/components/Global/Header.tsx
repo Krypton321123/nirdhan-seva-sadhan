@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import finalLogo from "../../assets/logo-final.png";
-import { backendurl } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -15,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
   const handleDonateNow = async () => {
     try {
       const response = await axios.get(
-        `${backendurl}/campaign/getLatestCampaign`
+        `${import.meta.env.VITE_APP_API_URL}/campaign/getLatestCampaign`
       );
       const { data } = response.data;
       console.log(response.data.data[0]);
@@ -33,10 +32,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
 
   return (
     <header className="relative">
-      {/* Top Black Bar */}
+      
       <div className="bg-black text-white py-2 px-4 flex items-center justify-between text-sm">
         <div className="flex space-x-4 items-center">
-          {/* Mobile Icon */}
+          
           <span className="flex items-center space-x-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             <span>9675496999</span>
           </span>
 
-          {/* Email Icon */}
+          
           <span className="flex items-center space-x-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -119,10 +118,10 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         </div>
       </div>
 
-      {/* Navigation Bar */}
+     
       <nav className="bg-white shadow-md py-4 px-4 lg:px-8">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo */}
+          
           <a href="/" className="flex items-center space-x-2">
             <img
               src={`${finalLogo}`} // Replace with your logo path
@@ -134,7 +133,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             </span>
           </a>
 
-          {/* Desktop Menu */}
+          
           <div className="hidden lg:flex space-x-6 text-sm font-medium text-gray-700">
             <a href="/" className="hover:text-green-700">
               Home
@@ -156,7 +155,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             </a>
           </div>
 
-          {/* Donate Now Button */}
+         
           <button
             onClick={handleDonateNow}
             className="hidden lg:block bg-gradient-to-r from-green-500 to-green-700 text-white px-6 py-2 rounded-full shadow-lg hover:from-green-600 hover:to-green-800 transition-all transform hover:scale-105"
@@ -164,7 +163,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
             Donate Now
           </button>
 
-          {/* Hamburger Menu */}
+       
           <button
             className="lg:hidden text-gray-700 focus:outline-none"
             onClick={() => setMobileMenuOpen(!isMobileMenuOpen)}
@@ -202,7 +201,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+       
         {isMobileMenuOpen && (
           <div className="lg:hidden mt-4 space-y-2 text-gray-700">
             <a href="/" className="block px-4 py-2 hover:bg-gray-100">
@@ -233,7 +232,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
         )}
       </nav>
 
-      {/* Render Children Below */}
+      
       <main>{children}</main>
     </header>
   );

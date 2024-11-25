@@ -10,15 +10,15 @@ const getCampaign = asyncHandler(async (req: Request, res: Response) => {
     try {
       const { id } = req.params;
         console.log("Int the get")
-      // Validate the ID format
+      
       if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(400).json(new ApiError(400, 'Invalid Campaign ID'));
       }
   
-      // Fetch the campaign
+     
       const campaign = await campaignModel.findById(id).populate('createdBy', 'name email');
   
-      // Handle campaign not found
+     
       if (!campaign) {
         return res.status(404).json(new ApiError(404, 'Campaign not found'));
       }
@@ -26,7 +26,7 @@ const getCampaign = asyncHandler(async (req: Request, res: Response) => {
       // Return the campaign details
       return res.status(200).json(new ApiResponse(200, campaign, "Campaign fetched successfully"));
     } catch (error) {
-      // Handle unexpected errors
+      
       return res.status(500).json(new ApiError(500, 'An error occurred while fetching the campaign'));
     }
   }); 
