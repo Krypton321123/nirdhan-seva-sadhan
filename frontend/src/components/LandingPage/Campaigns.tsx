@@ -57,8 +57,8 @@ const CampaignsPageSection: React.FC = () => {
 
                
                 <div className="flex justify-between text-sm text-gray-600 mb-4">
-                  <span>Raised: ${campaign.raised}</span>
-                  <span>Goal: ${campaign.goal}</span>
+                  <span>Raised: ₹{campaign.raised}</span>
+                  <span>Goal: ₹{campaign.goal}</span>
                 </div>
 
               

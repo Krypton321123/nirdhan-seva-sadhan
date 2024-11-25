@@ -79,7 +79,7 @@ const CampaignsPage: React.FC = () => {
                   ></div>
                   <div className="mb-4">
                     <h3 className="text-gray-800 font-semibold">
-                      Raised: ${campaign.raised} / ${campaign.goal}
+                      Raised: ₹{campaign.raised} / ₹{campaign.goal}
                     </h3>
                     <div className="w-full bg-gray-200 rounded-full h-4 mt-2">
                       <div

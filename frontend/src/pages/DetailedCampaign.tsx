@@ -214,8 +214,8 @@ const CampaignPage: React.FC = () => {
           <div className="mb-6">
             <h3 className="text-2xl font-semibold text-gray-800">Campaign Progress</h3>
             <div className="flex justify-center items-center my-4">
-              <span className="text-xl font-semibold text-green-500 mr-4">${campaign.raised}</span>
-              <span className="text-xl text-gray-600">raised of ${campaign.goal}</span>
+              <span className="text-xl font-semibold text-green-500 mr-4">₹{campaign.raised}</span>
+              <span className="text-xl text-gray-600">raised of ₹{campaign.goal}</span>
             </div>
             <ProgressBar raised={campaign.raised} goal={campaign.goal} />
           </div>
