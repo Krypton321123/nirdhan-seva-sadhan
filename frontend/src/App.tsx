@@ -15,7 +15,7 @@ import Gallery from './pages/Gallery';
 const App = () => {
   console.log(import.meta.env.VITE_APP_API_URL)
   return (
-    <>
+    <div>
       <Router>
         <Routes>
           <Route path='/' element={<Footer><Header><LandingPage /></Header></Footer>}/>
@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/gallery" element={<Footer><Header><Gallery /></Header></Footer>} />
         </Routes>
       </Router>
-    </>
+    </div>
   )
 }
 

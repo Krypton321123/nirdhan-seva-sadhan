@@ -7,8 +7,9 @@ dotenv.config();
 const start = async () => {
     try{
         await connectMongo(); 
+        const port = parseInt(process.env.PORT as any) || 8000;
         const displayURL = `http://localhost:${process.env.PORT}`
-        app.listen(process.env.PORT, () => {
+        app.listen(port, '0.0.0.0',() => {
             console.log(`App listening on ${displayURL}`)
         })
 
