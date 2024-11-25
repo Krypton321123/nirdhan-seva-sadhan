@@ -2,7 +2,6 @@ import { ChangeEvent, MouseEvent, useState } from "react";
 import InputField from "../components/InputField"
 import { toast } from "react-toastify";
 import axios from "axios";
-import { backendurl } from "../Constants";
 import { useNavigate } from "react-router-dom";
 
 
@@ -21,7 +20,7 @@ const Login = () => {
         }
 
         try {
-            const response: any = await axios.post(`${backendurl}/admin/login`, {username, password}, {
+            const response: any = await axios.post(`${import.meta.env.VITE_APP_API_URL}/admin/login`, {username, password}, {
                 headers: {
                     "Content-Type": "application/json"
                 }

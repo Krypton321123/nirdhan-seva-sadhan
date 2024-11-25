@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { backendurl } from '../Constants'
 import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
@@ -22,7 +21,7 @@ const ProtectedRoute = ({children}: {children: React.ReactNode}) => {
 
            
             const response = await axios.post(
-                `${backendurl}/admin/verify-user`,
+                `${import.meta.env.VITE_APP_API_URL}/admin/verify-user`,
                 {},
                 {
                     headers: {

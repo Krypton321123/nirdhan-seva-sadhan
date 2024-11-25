@@ -1,7 +1,6 @@
 import { ChangeEvent, MouseEvent, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { backendurl } from "../Constants";
 
 const AddGalleryImage = () => {
   const authToken = localStorage.getItem("authToken");
@@ -31,7 +30,7 @@ const AddGalleryImage = () => {
 
     try {
       const response: any = await axios.post(
-        `${backendurl}/admin/create-gallery-image`,
+        `${import.meta.env.VITE_APP_API_URL}/admin/create-gallery-image`,
         formData,
         {
           headers: {

@@ -1,7 +1,6 @@
 import { ChangeEvent, MouseEvent, useMemo, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import { toast } from "react-toastify";
-import { backendurl } from "../Constants";
 import axios from "axios";
 
 const AddBlog = () => {
@@ -33,7 +32,7 @@ const AddBlog = () => {
     formData.append("image", image);
 
     try {
-      const response = await axios.post(`${backendurl}/admin/create-blog`, formData, {
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/admin/create-blog`, formData, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },

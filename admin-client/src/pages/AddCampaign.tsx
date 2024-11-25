@@ -2,7 +2,6 @@ import { ChangeEvent, MouseEvent, useMemo, useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { backendurl } from "../Constants";
 
 const AddCampaign = () => {
   const authToken = localStorage.getItem("authToken");
@@ -40,7 +39,7 @@ const AddCampaign = () => {
     console.log(title, content, goal, image)
 
     try {
-      const response: any = await axios.post(`${backendurl}/admin/create-campaign`, formData, {
+      const response: any = await axios.post(`${import.meta.env.VITE_APP_API_URL}/admin/create-campaign`, formData, {
         headers: {
           Authorization: `Bearer ${authToken}`,
           "Content-Type": "multipart/form-data",
