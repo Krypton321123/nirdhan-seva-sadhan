@@ -49,11 +49,15 @@ const HeroWithOverlay: React.FC = () => {
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
           <div className="container mx-auto px-4 lg:px-16">
             <div className="text-white w-full lg:w-1/2">
-              <h1 className="text-3xl lg:text-5xl font-bold">
-                Give a Little, <span className="text-green-500">Change a Lot</span>
+              <h1 className="text-3xl lg:text-5xl font-bold mb-3">
+              "बदलाव की शुरुआत , 
               </h1>
+              <h1 className="text-3xl lg:text-5xl font-bold mb-2">
+                <span className="text-green-500"> आपसे है।" </span>
+              </h1>
+              
               <p className="mt-4 text-lg lg:text-xl">
-                Your donation can make a significant impact in the lives of those in need.
+              आपका दिया हुआ छोटा सा दान किसी के जीवन को नई उम्मीद और नई दिशा दे सकता है।
               </p>
               <div className="mt-6 flex flex-col lg:flex-row lg:space-x-4">
                 <button
@@ -75,7 +79,7 @@ const HeroWithOverlay: React.FC = () => {
       </section>
 
       
-      <section className="relative w-full lg:w-[80%] mx-auto top-[-40px] lg:top-[-180px] bg-white shadow-lg rounded-lg py-8 px-6 lg:px-10 z-10">
+      <section className="relative w-full lg:w-[80%] mx-auto mt-20 top-[-40px] lg:top-[-180px] bg-white shadow-lg rounded-lg py-8 px-6 lg:px-10 z-10">
       
         <h2 className="text-3xl lg:text-4xl font-bold text-center text-gray-800 mb-8">
           Our <span className="text-green-500">Causes</span>

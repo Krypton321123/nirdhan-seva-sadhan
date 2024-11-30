@@ -53,8 +53,14 @@ const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({
           className="w-full border rounded-lg px-3 py-2"
           placeholder="Enter mobile number"
         />
+        <div className="m-2">
+          <p className="block text-gray-700 font-medium mb-2">
+            Scan the QR Code to Donate 
+          </p>
+          <img className="w-36 h-36 mx-auto" src='/QR.jpg' alt="Nirdhan Seva Sansthan QR"/>
+        </div>
       </div>
-      <div className="flex justify-end space-x-4">
+      <div className="flex justify-end space-x-4 mx-auto">
         <button
           type="button"
           onClick={onClose}
@@ -62,6 +68,7 @@ const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({
         >
           Cancel
         </button>
+
         <button
           type="submit"
           className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-700"
