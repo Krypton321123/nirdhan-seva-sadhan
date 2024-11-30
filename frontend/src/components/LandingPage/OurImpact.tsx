@@ -31,7 +31,7 @@ const OurImpactSection: React.FC = () => {
     <section className="bg-gray-100 py-16 lg:mb-15">
       <h2 className="text-4xl font-semibold  text-center mb-16 lg:mb-12">Our <span className="text-green-500">Impact</span></h2>
 
-    
+      <div className="flex-row">
       <div className="container mx-auto px-4 text-center flex flex-col lg:flex-row items-center justify-between mb-12">
         <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
           <img
@@ -56,6 +56,7 @@ const OurImpactSection: React.FC = () => {
             className="w-[500px] h-[500px] object-cover rounded-lg"
           />
         </div>
+      </div>
       </div>
 
     
