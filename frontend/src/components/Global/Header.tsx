@@ -124,7 +124,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
           
           <a href="/" className="flex items-center space-x-2">
             <img
-              src={`${finalLogo}`} // Replace with your logo path
+              src={`${finalLogo}`}
               alt="Logo"
               className="h-20 w-auto"
             />
