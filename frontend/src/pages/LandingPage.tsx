@@ -5,6 +5,7 @@ import OurImpactSection from "../components/LandingPage/OurImpact";
 import WriteToUsSection from "../components/LandingPage/WriteToUs";
 import LatestStoriesSlider from "../components/LandingPage/LatestStories";
 import CampaignsPageSection from "../components/LandingPage/Campaigns";
+import NewspaperClippings from "../components/LandingPage/NewspaperClippings.tsx";
 
 const LandingPage: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const LandingPage: React.FC = () => {
 
       <OurImpactSection />
       <CampaignsPageSection />
+      <NewspaperClippings />
       <WriteToUsSection />
 
       <section className="py-16 px-4 lg:px-8 bg-gray-100 text-center">
