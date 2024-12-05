@@ -11,12 +11,12 @@ const LandingPage: React.FC = () => {
   return (
     <div className="w-full">
       <HeroWithOverlay />
-
+        <NewspaperClippings />
       <LatestStoriesSlider />
 
       <OurImpactSection />
       <CampaignsPageSection />
-      <NewspaperClippings />
+
       <WriteToUsSection />
 
       <section className="py-16 px-4 lg:px-8 bg-gray-100 text-center">
