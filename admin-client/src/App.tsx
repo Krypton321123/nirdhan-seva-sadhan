@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ProtectedRoute from "./components/ProtectedRoute.js"
 import AddGalleryImage from "./pages/AddGalleryImage.js"
 import CampaignDetails from "./pages/CampaignDetails.tsx";
+import AdminFormRequests from "./pages/FormSubmission.tsx";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/add-gallery-image" element={<ProtectedRoute><Sidebar><AddGalleryImage /></Sidebar></ProtectedRoute>} />
           <Route path={'/dashboard'} element={<ProtectedRoute><Sidebar><Dashboard /></Sidebar></ProtectedRoute>} />
           <Route path={'/detailed-campaign'} element={<ProtectedRoute><Sidebar><CampaignDetails /></Sidebar></ProtectedRoute>} />
+          <Route path={'/get-forms'} element={<ProtectedRoute><Sidebar><AdminFormRequests /></Sidebar></ProtectedRoute>} />
         </Routes>
         <ToastContainer />
       </BrowserRouter>

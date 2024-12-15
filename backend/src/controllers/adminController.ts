@@ -15,6 +15,7 @@ import { v2 as cloudinary } from "cloudinary";
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
 import { galleryModel } from "../models/galleryModel.js";
+import {formSubmissionModel} from "../models/formModel.js";
 // import { GallerySchemaInterface } from "../models/galleryModel.js";
 
 dotenv.config()
@@ -223,7 +224,7 @@ const verifyUser = asyncHandler(
 
 const addGalleryImageController = asyncHandler(
   async (req: RequestWithAdmin, res: Response) => {
-    const admin: any = req.admin; 
+
     const { description } = req.body; 
     const file = req.file; 
 
@@ -284,11 +285,48 @@ const addGalleryImageController = asyncHandler(
   }
 );
 
+const getFormController = asyncHandler(async (req: Request, res: Response) => {
+    const forms = await formSubmissionModel.find();
+
+    if (!forms) {
+        return res.status(500).json(new ApiError(500, "No forms available"));
+    }
+
+    return res.status(200).json(new ApiResponse(200, forms, "Forms fetched successfully"));
+})
+
+const approveForm = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { isApproved } = req.body;
+
+    if (!id) {
+        return res.status(400).json(new ApiError(400, "No id found"));
+    }
+
+    try {
+
+        const form = await formSubmissionModel.findById(id);
+
+        if (!form) {
+            return res.status(401).json(new ApiError(401, "No forms found"));
+        }
+
+        form.isApproved = isApproved;
+
+        await form.save();
+
+        return res.status(200).json(new ApiResponse(200, form, "Form is approved"));
+
+    } catch(err) {
+        return res.status(500).json(new ApiError(500, "Internal Server Error"))
+    }
+})
+
 
 export {
   adminLoginController,
   adminCreateCampaignController,
   adminCreateBlogController,
   verifyUser,
-  addGalleryImageController
+  addGalleryImageController, getFormController, approveForm
 };

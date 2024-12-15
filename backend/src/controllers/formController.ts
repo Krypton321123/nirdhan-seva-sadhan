@@ -1,6 +1,6 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/apiResponse.js";
-import { formSubmissionModel } from "../models/formModel.js";
+import {FormSubmissionInterface, formSubmissionModel} from "../models/formModel.js";
 import {ApiError} from "../utils/apiError.js";
 import { Request, Response } from 'express'
 
@@ -32,3 +32,21 @@ export const submitFormController = asyncHandler(async (req: Request, res: Respo
 
     return res.status(201).json(new ApiResponse(201, newForm, "Form submitted successfully."));
 });
+
+export const getFormStatus = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    try {
+
+        const form = await formSubmissionModel.findOne<FormSubmissionInterface>({ generatedId: id });
+
+        if (!form) {
+            return res.status(401).json(new ApiError(401, "No form found"));
+        }
+
+        return res.status(200).json(new ApiResponse(200, form, "Form is found"));
+
+    } catch(err) {
+
+    }
+})
