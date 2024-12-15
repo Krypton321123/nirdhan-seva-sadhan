@@ -78,7 +78,7 @@ const JoinUs: React.FC = () => {
       } else {
         setError("Failed to submit the form. Please try again.");
       }
-    } catch (err) {
+    } catch (err: any) {
       setError(err.response?.data?.message || "An error occurred. Please try again later.");
     } finally {
       setLoading(false);
