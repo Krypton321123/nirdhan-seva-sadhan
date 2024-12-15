@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Modal from "../components/CampaignPage/Modal";
 
-const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({ campaignName, onClose }) => {
+const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({ onClose }) => {
   const [amount, setAmount] = useState("");
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
