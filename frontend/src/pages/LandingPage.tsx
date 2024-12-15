@@ -6,11 +6,13 @@ import WriteToUsSection from "../components/LandingPage/WriteToUs";
 import LatestStoriesSlider from "../components/LandingPage/LatestStories";
 import CampaignsPageSection from "../components/LandingPage/Campaigns";
 import NewspaperClippings from "../components/LandingPage/NewspaperClippings.tsx";
+import Clothes from "../components/LandingPage/Clothes.tsx";
 
 const LandingPage: React.FC = () => {
   return (
     <div className="w-full">
       <HeroWithOverlay />
+         <Clothes />
         <NewspaperClippings />
       <LatestStoriesSlider />
 
