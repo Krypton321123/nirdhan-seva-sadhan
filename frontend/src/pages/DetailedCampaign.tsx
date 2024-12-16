@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Modal from "../components/CampaignPage/Modal";
 
-const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({ campaignName, onClose }) => {
+const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({ onClose }) => {
   const [amount, setAmount] = useState("");
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -21,7 +21,7 @@ const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({
 
   return (
       <form onSubmit={handleSubmit}>
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Donate to {campaignName}</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Donate to Campagin</h2>
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2">Amount (INR)</label>
           <input
@@ -58,6 +58,7 @@ const DonationForm: React.FC<{ campaignName: string; onClose: () => void }> = ({
               Scan the QR Code to Donate
             </p>
             <img className="w-36 h-36 mx-auto" src='/QR.jpg' alt="Nirdhan Seva Sansthan QR"/>
+            <div className="block text-green-600 font-medium mb-2">12A and 80G Cerified</div>
           </div>
         </div>
         <div className="flex justify-end space-x-4 mx-auto">
