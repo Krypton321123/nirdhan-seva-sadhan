@@ -12,6 +12,7 @@ const JoinUs: React.FC = () => {
   });
   const [status, setStatus] = useState<"pending" | "approved" | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +24,8 @@ const JoinUs: React.FC = () => {
 
       try {
         const response = await axios.get(`${import.meta.env.VITE_APP_API_URL}/form/getForm/${generatedId}`);
-        const { isApproved } = response.data.data;
+        const { isApproved, imageURL } = response.data.data;
+        setImageUrl(imageURL);
 
         if (isApproved) {
           setStatus("approved");
@@ -78,7 +80,9 @@ const JoinUs: React.FC = () => {
       } else {
         setError("Failed to submit the form. Please try again.");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       setError(err.response?.data?.message || "An error occurred. Please try again later.");
     } finally {
       setLoading(false);
@@ -93,7 +97,7 @@ const JoinUs: React.FC = () => {
             <h2 className="text-3xl font-bold mb-4">Your ID Card</h2>
             <p className="text-green-600 mb-4">Your application has been approved!</p>
             <a
-                href="/" // Replace with actual ID card file
+                href={`${imageUrl}`} // Replace with actual ID card file
                 download
                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
             >

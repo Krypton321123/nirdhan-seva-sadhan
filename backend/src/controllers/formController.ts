@@ -44,7 +44,9 @@ export const getFormStatus = asyncHandler(async (req: Request, res: Response) =>
             return res.status(401).json(new ApiError(401, "No form found"));
         }
 
-        return res.status(200).json(new ApiResponse(200, form, "Form is found"));
+        const { isApproved, imageURL } = form;
+
+        return res.status(200).json(new ApiResponse(200, {isApproved, imageURL}, "Form is found"));
 
     } catch(err) {
 

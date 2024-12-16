@@ -6,144 +6,141 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ children }: SidebarProps) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-      <div className="h-screen w-screen flex">
-        {/* Sidebar */}
+      <div className="h-full w-screen flex flex-col lg:flex-row">
+        {/* Desktop Sidebar */}
+        <div className="sidebar hidden lg:block bg-slate-950 w-[20rem] h-screen">
+          <div className="logo text-center w-[20rem] h-[8rem] mt-7 flex-col justify-between">
+          <span className="text-white font-bold text-2xl block">
+            Nirdhan Sewa Sansthan
+          </span>
+            <br />
+            <span className="text-white font-bold text-xl block">Admin Panel</span>
+          </div>
+          <div className="linkcenter w-[20rem] h-[20rem]">
+            <SidebarLink to="/dashboard" label="Home" />
+            <SidebarLink to="/add-campaign" label="Add Campaign" />
+            <SidebarLink to="/add-blog" label="Add Blog" />
+            <SidebarLink to="/add-gallery-image" label="Add Gallery Image" />
+            <SidebarLink
+                to={'/get-forms'}
+                label={'Approve ID Cards'}
+            />
+          </div>
+        </div>
+
+        {/* Mobile Hamburger Menu */}
+        <div className="lg:hidden flex items-center p-4 bg-slate-950 text-white w-full">
+          <span className="font-bold text-xl">Admin Panel</span>
+          <button
+              className="ml-auto"
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+          >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+            >
+              <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16m-7 6h7"
+              />
+            </svg>
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+            <div
+                className="fixed inset-0 bg-black bg-opacity-50 z-20"
+                onClick={() => setIsMobileMenuOpen(false)}
+            ></div>
+        )}
+
+        {/* Mobile Sidebar */}
         <div
-            className={`bg-slate-950 h-screen lg:block ${
-                isSidebarOpen ? "block" : "hidden"
-            } absolute lg:relative z-20 lg:w-[20rem] w-[16rem]`}
+            className={`fixed top-0 left-0 h-full bg-slate-950 z-30 transition-transform transform ${
+                isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+            } w-[16rem]`}
         >
-          <div className="logo text-center mt-7 flex-col justify-between ">
+          <div className="logo text-center w-full h-[8rem] mt-7 flex-col justify-between">
           <span className="text-white font-bold text-2xl block">
             Nirdhan Seva Sansthan
           </span>
             <br />
-            <span className="text-white font-bold text-xl block">
-            Admin Panel
-          </span>
+            <span className="text-white font-bold text-xl block">Admin Panel</span>
           </div>
-          <div className="linkcenter mt-10">
-            <div className="w-full h-[4rem] flex justify-center items-center">
-              <Link to={"/dashboard"}>
-                <button className="cursor-pointer flex hover:opacity-50 rounded-lg items-center text-white border-2 p-2 w-[12rem] lg:w-[15rem] h-[3rem]">
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-6"
-                  >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                    />
-                  </svg>
-                  &nbsp;&nbsp;Home
-                </button>
-              </Link>
-            </div>
-            <div className="w-full h-[4rem] flex justify-center items-center">
-              <Link to={"/add-campaign"}>
-                <button className="cursor-pointer flex hover:opacity-50 rounded-lg items-center text-white border-2 p-2 w-[12rem] lg:w-[15rem] h-[3rem]">
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-6"
-                  >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                  </svg>
-                  &nbsp;&nbsp;Add Campaign
-                </button>
-              </Link>
-            </div>
-            <div className="w-full h-[4rem] flex justify-center items-center">
-              <Link to={"/add-blog"}>
-                <button className="cursor-pointer flex hover:opacity-50 rounded-lg items-center text-white border-2 p-2 w-[12rem] lg:w-[15rem] h-[3rem]">
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-6"
-                  >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                  </svg>
-                  &nbsp;&nbsp;Add Blog
-                </button>
-              </Link>
-            </div>
-            <div className="w-full h-[4rem] flex justify-center items-center">
-              <Link to={"/add-gallery-image"}>
-                <button className="cursor-pointer flex hover:opacity-50 rounded-lg items-center text-white border-2 p-2 w-[12rem] lg:w-[15rem] h-[3rem]">
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="currentColor"
-                      className="size-6"
-                  >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                  </svg>
-                  &nbsp;&nbsp;Add Gallery Image
-                </button>
-              </Link>
-            </div>
+          <div className="linkcenter mt-10 space-y-4">
+            <SidebarLink
+                to="/dashboard"
+                label="Home"
+                onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <SidebarLink
+                to="/add-campaign"
+                label="Add Campaign"
+                onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <SidebarLink
+                to="/add-blog"
+                label="Add Blog"
+                onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <SidebarLink
+                to="/add-gallery-image"
+                label="Add Gallery Image"
+                onClick={() => setIsMobileMenuOpen(false)}
+            />
+            <SidebarLink
+                to={'/get-forms'}
+                label={'Approve ID Cards'}
+            />
           </div>
         </div>
 
         {/* Main Content */}
-        <div className="relative flex-grow">
-          {/* Mobile Toggle Button */}
-          <div className="lg:hidden flex items-center justify-between bg-slate-950 p-4">
-            <span className="text-white font-bold">Admin Panel</span>
-            <button
-                className="text-white"
-                onClick={() => setIsSidebarOpen((prev) => !prev)}
-            >
-              <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="h-6 w-6"
-              >
-                <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
-            </button>
-          </div>
-
-          {/* Main Content */}
-          <div className="p-4">{children}</div>
-        </div>
+        <div className="flex-grow">{children}</div>
       </div>
   );
 };
+
+// Sidebar Link Component
+const SidebarLink = ({
+                       to,
+                       label,
+                       onClick,
+                     }: {
+  to: string;
+  label: string;
+  onClick?: () => void;
+}) => (
+    <div className="w-full flex justify-center items-center mt-4">
+      <Link to={to} onClick={onClick}>
+        <button className="cursor-pointer flex hover:opacity-50 rounded-lg items-center text-white border-2 p-2 w-[12rem] lg:w-[15rem] h-[3rem]">
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-5 w-5"
+          >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+          &nbsp;&nbsp;{label}
+        </button>
+      </Link>
+    </div>
+);
 
 export default Sidebar;

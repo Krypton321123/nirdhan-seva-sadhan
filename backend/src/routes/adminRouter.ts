@@ -3,7 +3,13 @@ import {
     addGalleryImageController,
     adminCreateBlogController,
     adminCreateCampaignController,
-    adminLoginController, approveForm,
+    adminDeleteBlog,
+    adminDeleteCampaign, adminDeleteGalleryItem,
+    adminGetBlogs,
+    adminGetCampaigns,
+    adminGetGallery,
+    adminLoginController,
+    approveForm,
     getFormController,
     verifyUser
 } from "../controllers/adminController.js";
@@ -19,5 +25,11 @@ adminRouter.route(`/create-campaign`).post(adminAuthMiddleware, uploadCampaignIm
 adminRouter.route('/create-gallery-image').post(adminAuthMiddleware, uploadCampaignImage, addGalleryImageController)
 adminRouter.route('/get-forms').get(adminAuthMiddleware, getFormController);
 adminRouter.route('/approve-form/:id').patch(adminAuthMiddleware, approveForm);
+adminRouter.route('/get-campaigns').get(adminAuthMiddleware, adminGetCampaigns);
+adminRouter.route('/delete-campaign/:id').delete(adminAuthMiddleware, adminDeleteCampaign)
+adminRouter.route('/get-blogs').get(adminAuthMiddleware, adminGetBlogs);
+adminRouter.route('/delete-blog/:id').delete(adminAuthMiddleware, adminDeleteBlog);
+adminRouter.route('/get-gallery').get(adminAuthMiddleware, adminGetGallery);
+adminRouter.route('/delete-gallery-item/:id').delete(adminAuthMiddleware, adminDeleteGalleryItem);
 
 export { adminRouter }

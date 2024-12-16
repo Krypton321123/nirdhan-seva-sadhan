@@ -54,7 +54,7 @@ const AddGalleryImage = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center">
       <div className="w-[95%] h-[95%] rounded-xl bg-gray-200">
         <div className="title w-[100%] h-[5rem] flex justify-start">
           <span className="font-bold text-4xl ml-4 mt-8">Add Gallery Image</span>

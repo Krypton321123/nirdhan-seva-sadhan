@@ -1,7 +1,8 @@
 // AdminFormRequests.tsx
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 
 const AdminFormRequests = () => {
     const [formRequests, setFormRequests] = useState<any[]>([]);
@@ -24,12 +25,12 @@ const AdminFormRequests = () => {
             }
         };
 
-        fetchFormRequests();
+       fetchFormRequests().then();
     }, []);
 
     const handleApprove = async (id: string) => {
         try {
-            await axios.patch(
+            const response: any = await axios.patch(
                 `${import.meta.env.VITE_APP_API_URL}/admin/approve-form/${id}`,
                 { isApproved: true },
                 {
@@ -38,8 +39,13 @@ const AdminFormRequests = () => {
                     },
                 }
             );
-            toast.success("Form request approved!");
-            setFormRequests(formRequests.map(form => form._id === id ? { ...form, isApproved: true } : form));
+
+            toast.success("Form request approved and ID card generated!");
+            setFormRequests(
+                formRequests.map((form) =>
+                    form._id === id ? { ...form, isApproved: true, imageURL: response.data.data.imageURL } : form
+                )
+            );
         } catch (error) {
             toast.error("Failed to approve form request.");
         }

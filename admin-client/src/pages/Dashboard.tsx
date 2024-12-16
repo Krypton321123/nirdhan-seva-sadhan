@@ -5,8 +5,8 @@ const Dashboard = () => {
 
   const cards = [
     { title: "Campaign Master", description: "Manage all your campaigns here.", onClick: () => {navigate('/detailed-campaign')}},
-    { title: "Blog Master", description: "Create and edit your blog posts.", onClick: () => {navigate('/detailed-campaign')}},
-    { title: "Gallery Master", description: "Organize and upload images to the gallery.", onClick: () => {navigate('/detailed-campaign')} },
+    { title: "Blog Master", description: "Create and edit your blog posts.", onClick: () => {navigate('/detailed-blog')}},
+    { title: "Gallery Master", description: "Organize and upload images to the gallery.", onClick: () => {navigate('/detailed-gallery')} },
   ];
 
   return (

@@ -55,7 +55,7 @@ const AddBlog = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-full h-screen flex justify-center items-center">
       <div className="w-[90%] h-[90%] rounded-xl bg-gray-200 flex flex-col justify-between p-6">
         <div className="title w-full h-auto">
           <span className="font-bold text-3xl">Add New Blog</span>

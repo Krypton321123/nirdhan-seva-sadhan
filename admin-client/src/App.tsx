@@ -10,6 +10,8 @@ import ProtectedRoute from "./components/ProtectedRoute.js"
 import AddGalleryImage from "./pages/AddGalleryImage.js"
 import CampaignDetails from "./pages/CampaignDetails.tsx";
 import AdminFormRequests from "./pages/FormSubmission.tsx";
+import BlogDetails from "./pages/BlogDetails.tsx";
+import GalleryDetails from "./pages/GalleryDetails.tsx";
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
           <Route path={'/dashboard'} element={<ProtectedRoute><Sidebar><Dashboard /></Sidebar></ProtectedRoute>} />
           <Route path={'/detailed-campaign'} element={<ProtectedRoute><Sidebar><CampaignDetails /></Sidebar></ProtectedRoute>} />
           <Route path={'/get-forms'} element={<ProtectedRoute><Sidebar><AdminFormRequests /></Sidebar></ProtectedRoute>} />
+          <Route path={'/detailed-blog'} element={<ProtectedRoute><Sidebar><BlogDetails /></Sidebar></ProtectedRoute>}/>
+          <Route path={'/detailed-gallery'} element={<ProtectedRoute><Sidebar><GalleryDetails /></Sidebar></ProtectedRoute>}/>
         </Routes>
         <ToastContainer />
       </BrowserRouter>
