@@ -8,9 +8,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const causes = [
-  { title: "Helping Those in Need", description: "Providing resources to improve lives.", image: causes1, link: "/aboutus" },
-  { title: "Building Better Futures", description: "Creating opportunities for growth.", image: causes2, link: "/aboutus" },
-  { title: "Ensuring Food Security", description: "Helping people with food supplies.", image: causes3, link: "/aboutus" },
+  { title: "ज़रूरतमंदों की मदद करना", description: "जीवन को बेहतर बनाने के लिए संसाधन उपलब्ध कराना", image: causes1, link: "/aboutus" },
+  { title: "बेहतर भविष्य का निर्माण करना।", description: "विकास के लिए अवसर प्रदान करना।", image: causes2, link: "/aboutus" },
+  { title: "खाद्य सुरक्षा सुनिश्चित करना।", description: "लोगों को खाद्य सामग्री उपलब्ध कराना।", image: causes3, link: "/aboutus" },
 ];
 
 
@@ -57,7 +57,7 @@ const HeroWithOverlay: React.FC = () => {
                 </h1>
 
                 <p className="mt-4 text-lg lg:text-xl">
-                  आपका दिया हुआ छोटा सा दान किसी के जीवन को नई उम्मीद और नई दिशा दे सकता है।
+                  आपका दिया हुआ छोटा सा सहयोग किसी के जीवन को नई उम्मीद और नई दिशा दे सकता है।
                 </p>
                 <div className="mt-6 flex flex-col lg:flex-row lg:space-x-4">
                   <button

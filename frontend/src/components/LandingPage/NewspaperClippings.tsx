@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import news1 from '../../assets/news-paper-1.jpg'
-import news2 from '../../assets/news-paper-2.jpg'
-import news3 from '../../assets/news-paper-3.jpeg'
-import news4 from '../../assets/news-paper-4.jpeg'
-import news5 from '../../assets/news-paper-5.jpeg'
+import news1 from "../../assets/news-paper-1.jpg";
+import news2 from "../../assets/news-paper-2.jpg";
+import news3 from "../../assets/news-paper-3.jpeg";
+import news4 from "../../assets/news-paper-4.jpeg";
+import news5 from "../../assets/news-paper-5.jpeg";
 
 const NewspaperClippings: React.FC = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
     const clippings = [
         {
             imageURL: news1,
@@ -20,17 +23,16 @@ const NewspaperClippings: React.FC = () => {
         },
         {
             imageURL: news3,
-            altText: "Newspaper clipping 2",
+            altText: "Newspaper clipping 3",
         },
         {
             imageURL: news4,
-            altText: "Newspaper clipping 2",
+            altText: "Newspaper clipping 4",
         },
         {
             imageURL: news5,
-            altText: "Newspaper clipping 2",
+            altText: "Newspaper clipping 5",
         },
-
     ];
 
     const settings = {
@@ -65,6 +67,16 @@ const NewspaperClippings: React.FC = () => {
         ],
     };
 
+    const openModal = (imageURL: string) => {
+        setSelectedImage(imageURL);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedImage(null);
+        setIsModalOpen(false);
+    };
+
     return (
         <section className="py-16 bg-gray-100">
             <div className="container mx-auto px-4">
@@ -73,7 +85,11 @@ const NewspaperClippings: React.FC = () => {
                 </h2>
                 <Slider {...settings}>
                     {clippings.map((clipping, index) => (
-                        <div key={index} className="px-2">
+                        <div
+                            key={index}
+                            className="px-2 cursor-pointer"
+                            onClick={() => openModal(clipping.imageURL)}
+                        >
                             <div className="rounded-lg overflow-hidden shadow-md">
                                 <img
                                     src={clipping.imageURL}
@@ -85,6 +101,31 @@ const NewspaperClippings: React.FC = () => {
                     ))}
                 </Slider>
             </div>
+
+            {/* Modal for Zoomed Image */}
+            {isModalOpen && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50"
+                    onClick={closeModal}
+                >
+                    <div
+                        className="relative max-w-3xl w-full mx-4 bg-white rounded-lg shadow-lg p-4"
+                        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
+                    >
+                        <button
+                            className="absolute top-4 right-4 text-white bg-red-500 rounded-full px-3 py-1 hover:bg-red-600"
+                            onClick={closeModal}
+                        >
+                            Close
+                        </button>
+                        <img
+                            src={selectedImage || ""}
+                            alt="Zoomed Clipping"
+                            className="w-full h-full object-contain"
+                        />
+                    </div>
+                </div>
+            )}
         </section>
     );
 };

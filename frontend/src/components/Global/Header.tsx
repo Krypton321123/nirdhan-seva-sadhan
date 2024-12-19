@@ -129,7 +129,7 @@ const Header: React.FC<HeaderProps> = ({ children }) => {
               className="h-20 w-auto"
             />
             
-            <span className="text-xl font-bold text-green-700">
+            <span className="text-3xl font-bold text-green-700">
               Nirdhan Sewa Sansthan <br/>
               <div className="text-sm text-black font-semibold">ITA एवं नीति आयोग द्व्रारा अनुमोदित</div>
             </span>
