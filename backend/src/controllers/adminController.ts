@@ -329,6 +329,7 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
 
         res.status(200).json(new ApiResponse(200, form, isApproved ? "Form approved and ID card generated." : "Form rejected."));
     } catch (err) {
+        console.log(err)
         res.status(500).json(new ApiError(500, "Internal Server Error"));
     }
 });
