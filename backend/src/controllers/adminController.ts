@@ -1,20 +1,19 @@
-import { ApiResponse } from "../utils/apiResponse.js";
-import { ApiError } from "../utils/apiError.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { isEmpty } from "../utils/isEmpty.js";
-import { Request, Response } from "express";
-import { adminModel } from "../models/adminModel.js";
-import { adminInterface } from "../models/adminModel.js";
+import {ApiResponse} from "../utils/apiResponse.js";
+import {ApiError} from "../utils/apiError.js";
+import {asyncHandler} from "../utils/asyncHandler.js";
+import {isEmpty} from "../utils/isEmpty.js";
+import {Request, Response} from "express";
+import {adminInterface, adminModel} from "../models/adminModel.js";
 import path from 'path'
 import fs from 'fs'
-import {  campaignModel,} from "../models/campaignModels.js";
-import { RequestWithAdmin } from "../utils/RequestWithUser.js";
-import { blogModel, blogSchemaInterface } from "../models/blogModel.js";
+import {campaignModel,} from "../models/campaignModels.js";
+import {RequestWithAdmin} from "../utils/RequestWithUser.js";
+import {blogModel, blogSchemaInterface} from "../models/blogModel.js";
 import jsonwebtoken from "jsonwebtoken";
-import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
-import { fileURLToPath } from 'url';
+import {UploadApiResponse, v2 as cloudinary} from "cloudinary";
+import {fileURLToPath} from 'url';
 import dotenv from 'dotenv'
-import { galleryModel } from "../models/galleryModel.js";
+import {galleryModel} from "../models/galleryModel.js";
 import {formSubmissionModel} from "../models/formModel.js";
 import puppeteer from "puppeteer";
 // import { GallerySchemaInterface } from "../models/galleryModel.js";
@@ -298,6 +297,7 @@ const getFormController = asyncHandler(async (req: Request, res: Response) => {
 
 const approveForm = asyncHandler(async (req: Request, res: Response) => {
     const { id } = req.params;
+    console.log(id);
     const { isApproved } = req.body;
 
     if (!id) {
@@ -305,6 +305,7 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
     }
 
     try {
+        console.log("Idhar aagaye")
         const form = await formSubmissionModel.findById(id);
 
         if (!form) {
@@ -313,15 +314,14 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
 
         form.isApproved = isApproved;
 
+        console.log("idhar aa gaye 2")
         if (isApproved) {
             // Generate ID card if approved
-            const idCardUrl = await generateIDcard({
+            form.imageURL = await generateIDcard({
                 name: form.name,
                 dob: "Not Provided", // Ensure all data is available
                 address: form.address
-            });
-
-            form.imageURL = idCardUrl; // Save the Cloudinary URL in DB
+            }); // Save the Cloudinary URL in DB
         }
 
         await form.save();
@@ -440,7 +440,7 @@ export {
 };
 
 
-// --------------------------------------UTIL FUNCTIONS-------------------------------------------------------
+// --------------------------------------UTIL FUNCTIONS------------------------------------------------------- //
 
 const generateIDcard = async (userData: any) => {
     const browser = await puppeteer.launch();
