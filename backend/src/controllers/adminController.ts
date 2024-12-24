@@ -316,6 +316,7 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
 
         console.log("idhar aa gaye 2")
         if (isApproved) {
+            console.log("idhar aagaye 4")
             // Generate ID card if approved
             form.imageURL = await generateIDcard({
                 name: form.name,
@@ -323,7 +324,7 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
                 address: form.address
             }); // Save the Cloudinary URL in DB
         }
-
+        console.log("Idhar aagaye 3")
         await form.save();
 
         res.status(200).json(new ApiResponse(200, form, isApproved ? "Form approved and ID card generated." : "Form rejected."));
@@ -445,6 +446,8 @@ export {
 const generateIDcard = async (userData: any) => {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
+
+    console.log("Idhar aagaye 5")
 
     const html = `
             <!DOCTYPE html>
