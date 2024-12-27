@@ -15,8 +15,7 @@ import {fileURLToPath} from 'url';
 import dotenv from 'dotenv'
 import {galleryModel} from "../models/galleryModel.js";
 import {formSubmissionModel} from "../models/formModel.js";
-import puppeteer from "puppeteer";
-// import { GallerySchemaInterface } from "../models/galleryModel.js";
+import nodeHtmlToImage from "node-html-to-image";
 
 dotenv.config()
 
@@ -445,10 +444,7 @@ export {
 // --------------------------------------UTIL FUNCTIONS------------------------------------------------------- //
 
 const generateIDcard = async (userData: any) => {
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
 
-    console.log("Idhar aagaye 5")
 
     const html = `
             <!DOCTYPE html>
@@ -596,13 +592,14 @@ const generateIDcard = async (userData: any) => {
         </body>
     </html>`
 
-    await page.setContent(html);
-    const screenshotBuffer = await page.screenshot(); //png id card
+    const imageBuffer = await nodeHtmlToImage({
+        html,
+        quality: 100,
+        type: 'png',
+        puppeteerArgs: { args: ['--no-sandbox'] },
+    });
 
-    await browser.close();
-
-
-    const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
+    const uploadResult: UploadApiResponse = await new Promise((resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
             { folder: 'id-cards' },
             (error, result) => {
@@ -612,10 +609,9 @@ const generateIDcard = async (userData: any) => {
                 resolve(result as UploadApiResponse);
             }
         );
-        uploadStream.write(screenshotBuffer);
+        uploadStream.write(imageBuffer);
         uploadStream.end();
-    })
+    });
 
     return uploadResult.secure_url;
-
-}
+};
