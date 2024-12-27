@@ -15,7 +15,7 @@ import {fileURLToPath} from 'url';
 import dotenv from 'dotenv'
 import {galleryModel} from "../models/galleryModel.js";
 import {formSubmissionModel} from "../models/formModel.js";
-import {createCanvas, loadImage} from 'canvas'
+import puppeteer from "puppeteer";
 
 dotenv.config()
 
@@ -443,139 +443,109 @@ export {
 
 // --------------------------------------UTIL FUNCTIONS------------------------------------------------------- //
 
+
+
 const generateIDcard = async (userData: { name: string; dob: string; address: string }) => {
-    const canvasWidth = 400;
-    const lineHeight = 25;
-    const padding = 15;
-    const headerHeight = 60;
-    const highlightHeight = 80;
-    const footerHeight = 60;
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
-    const canvas = createCanvas(canvasWidth, 500);
-    const ctx = canvas.getContext('2d');
+    console.log("Idhar aagaye 5")
 
-    ctx.font = '14px Arial';
+    const html =`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ID Card</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
 
-
-    const wrapText = (text: string, maxWidth: number): string[] => {
-        const words = text.split(' ');
-        const lines = [];
-        let currentLine = '';
-
-        for (const word of words) {
-            const testLine = currentLine + word + ' ';
-            if (ctx.measureText(testLine).width > maxWidth) {
-                lines.push(currentLine.trim());
-                currentLine = word + ' ';
-            } else {
-                currentLine = testLine;
-            }
+    .id-card {
+            width: 380px;
+            border: 2px solid #333333;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            padding: 10px 15px;
         }
-        if (currentLine) lines.push(currentLine.trim());
-        return lines;
-    };
+    
+    .header {
+            background-color: #4caf50;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    
+    .highlight {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #d32f2f;
+            margin: 15px 0;
+        }
+    
+    .details p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    
+    .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #333333;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        </style>
+        </head>
+        <body>
+        <div class="id-card">
+        <div class="header">Nirdhan Sewa Sansthan</div>
+        <div class="highlight">IDENTITY CARD</div>
+        <div class="details">
+            <p><strong>Name:</strong> ${userData.name}</p>
+        <p><strong>D.O.B:</strong> ${userData.dob}</p>
+        <p><strong>Valid Upto:</strong> 31-Dec-2026</p>
+        <p><strong>Address:</strong> ${userData.address}</p>
+        </div>
+        <div class="footer">Empowering lives through trust and certification</div>
+        </div>
+        </body>
+        </html>
+        `;
+    await page.setContent(html);
+    const screenshotBuffer = await page.screenshot(); //png id card
 
-    const addressLines = wrapText(userData.address, canvasWidth - 2 * padding);
-    const dynamicDetailsHeight = addressLines.length * lineHeight;
-    const totalHeight = headerHeight + highlightHeight + lineHeight * 4 + dynamicDetailsHeight + footerHeight + padding * 3;
-    canvas.height = totalHeight;
-
-
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvasWidth, totalHeight);
-
-    const drawRoundedRect = (x: number, y: number, width: number, height: number, radius: number) => {
-        ctx.beginPath();
-        ctx.moveTo(x + radius, y);
-        ctx.lineTo(x + width - radius, y);
-        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
-        ctx.lineTo(x + width, y + height - radius);
-        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-        ctx.lineTo(x + radius, y + height);
-        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
-        ctx.lineTo(x, y + radius);
-        ctx.quadraticCurveTo(x, y, x + radius, y);
-        ctx.closePath();
-        ctx.stroke();
-    };
-
-    ctx.strokeStyle = '#333333';
-    ctx.lineWidth = 2;
-    drawRoundedRect(0, 0, canvasWidth, totalHeight, 10);
-
-
-    ctx.save();
-    ctx.font = '35px Arial';
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.translate(canvasWidth / 2, totalHeight / 2);
-    ctx.fillText('निर्धन सेवा संस्थान', 0, 0);
-    ctx.restore();
-
-
-    const watermarkImage = await loadImage(
-        'https://res.cloudinary.com/dneswskog/image/upload/f_auto,q_auto/opru24oorgegr42fgcrn'
-    );
-    ctx.globalAlpha = 0.1;
-    ctx.drawImage(watermarkImage, canvasWidth / 2 - 100, totalHeight / 2 - 100, 200, 200);
-    ctx.globalAlpha = 1;
-
-
-    ctx.fillStyle = '#4caf50';
-    ctx.fillRect(padding, padding, canvasWidth - 2 * padding, headerHeight);
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 18px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('Nirdhan Sewa Sansthan', canvasWidth / 2, padding + 30);
-    ctx.font = '12px Arial';
-    ctx.fillText('ITA एवं नीति आयोग द्वारा अनुमोदित', canvasWidth / 2, padding + 45);
-
-
-    ctx.fillStyle = '#d32f2f';
-    ctx.font = 'bold 20px Arial';
-    ctx.fillText('IDENTITY CARD', canvasWidth / 2, headerHeight + 70);
-
-
-    ctx.fillStyle = '#333333';
-    ctx.font = '14px Arial';
-    ctx.textAlign = 'left';
-    let yPosition = headerHeight + highlightHeight + padding;
-    ctx.fillText(`Name: ${userData.name}`, padding, yPosition);
-    yPosition += lineHeight;
-    ctx.fillText(`D.O.B: ${userData.dob}`, padding, yPosition);
-    yPosition += lineHeight;
-    ctx.fillText('Valid Upto: 31-Dec-2026', padding, yPosition);
-    yPosition += lineHeight;
-
-    addressLines.forEach((line) => {
-        ctx.fillText(`Address: ${line}`, padding, yPosition);
-        yPosition += lineHeight;
-    });
-
-
-    ctx.font = 'bold 14px Arial';
-    ctx.textAlign = 'center';
-    ctx.fillText('12A and 80G Certified', canvasWidth / 2, totalHeight - footerHeight + 20);
-    ctx.font = 'italic 12px Arial';
-    ctx.fillStyle = '#4caf50';
-    ctx.fillText('Empowering lives through trust and certification', canvasWidth / 2, totalHeight - footerHeight + 40);
-
-    const imageBuffer = canvas.toBuffer('image/png');
-
+    await browser.close();
 
     const uploadResult = await new Promise<UploadApiResponse>((resolve, reject) => {
-        cloudinary.uploader.upload_stream(
-            { folder: 'id-cards' },
+        const uploadStream = cloudinary.uploader.upload_stream(
+            {folder: 'id-cards'},
             (error, result) => {
                 if (error) {
                     return reject(new Error('Error uploading image to Cloudinary: ' + error.message));
                 }
                 resolve(result as UploadApiResponse);
             }
-        ).end(imageBuffer);
-    });
+        );
+        uploadStream.write(screenshotBuffer);
+        uploadStream.end();
+    })
 
     return uploadResult.secure_url;
-};
+}
 
