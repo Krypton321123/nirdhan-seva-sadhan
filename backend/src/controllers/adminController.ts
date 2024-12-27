@@ -444,8 +444,6 @@ export {
 // --------------------------------------UTIL FUNCTIONS------------------------------------------------------- //
 
 const generateIDcard = async (userData: any) => {
-
-
     const html = `
             <!DOCTYPE html>
         <html lang="en">
