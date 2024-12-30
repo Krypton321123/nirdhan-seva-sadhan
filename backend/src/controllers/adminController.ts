@@ -455,6 +455,7 @@ const generateIDcard = async (userData: { name: string; dob: string; address: st
     console.log("Idhar aagaye 5")
 
     const html =`
+    
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -462,8 +463,15 @@ const generateIDcard = async (userData: { name: string; dob: string; address: st
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>ID Card</title>
       <style>
+        @font-face {
+          font-family: 'Noto Sans Devanagari';
+          font-style: normal;
+          font-weight: 400;
+          src: url('https://fonts.gstatic.com/s/notosansdevanagari/v10/Pby6FmXiEBPT4ITbgNA5CgmOel9GpA9rfxefAMk.woff2') format('woff2');
+        }
+    
         body {
-          font-family: Arial, sans-serif;
+          font-family: 'Noto Sans Devanagari', Arial, sans-serif;
           background-color: #f4f4f9;
           display: flex;
           justify-content: center;
@@ -598,13 +606,11 @@ const generateIDcard = async (userData: { name: string; dob: string; address: st
           <div>Nirdhan Sewa Sansthan</div>
           <div class="sub-text">ITA एवं नीति आयोग द्वारा अनुमोदित</div>
         </div>
-     <div class="highlight">IDENTITY CARD</div>
+        <div class="highlight">IDENTITY CARD</div>
     
         <div class="image-container">
-          <img src=${userData.userImageURL} alt="Profile Picture" />
+          <img src="${userData.userImageURL}" alt="Profile Picture" />
         </div>
-    
-       
     
         <div class="details">
           <p><span>Name:</span> ${userData.name}</p>
