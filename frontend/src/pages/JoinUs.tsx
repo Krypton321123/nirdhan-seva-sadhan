@@ -7,6 +7,7 @@ const JoinUs: React.FC = () => {
     name: "",
     email: "",
     phone: "",
+    dob: "",
     address: "",
     purpose: "",
   });
@@ -76,7 +77,7 @@ const JoinUs: React.FC = () => {
       if (response.status === 201) {
         setMessage("Your registration form has been submitted successfully!");
         setStatus("pending"); // Mark as pending after submission
-        setFormData({ name: "", email: "", phone: "", address: "", purpose: "" }); // Reset form
+        setFormData({ name: "", email: "", phone: "", dob: "", address: "", purpose: "" }); // Reset form
       } else {
         setError("Failed to submit the form. Please try again.");
       }
@@ -97,7 +98,7 @@ const JoinUs: React.FC = () => {
             <h2 className="text-3xl font-bold mb-4">Your ID Card</h2>
             <p className="text-green-600 mb-4">Your application has been approved!</p>
             <a
-                href={`${imageUrl}`} // Replace with actual ID card file
+                href={`${imageUrl}`}
                 download
                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition"
             >
@@ -168,6 +169,18 @@ const JoinUs: React.FC = () => {
                     id="email"
                     name="email"
                     value={formData.email}
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-400"
+                    placeholder="Johndoe@example.com"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1" htmlFor="email">Date Of Birth</label>
+                <input
+                    type="date"
+                    id="email"
+                    name="dob"
+                    value={formData.dob}
                     onChange={handleChange}
                     className="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-400"
                     placeholder="Johndoe@example.com"

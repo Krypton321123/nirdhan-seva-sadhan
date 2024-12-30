@@ -319,9 +319,9 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
             // Generate ID card if approved
             form.imageURL = await generateIDcard({
                 name: form.name,
-                dob: "Not Provided", // Ensure all data is available
+                dob: form.dob,
                 address: form.address
-            }); // Save the Cloudinary URL in DB
+            });
         }
         console.log("Idhar aagaye 3")
         await form.save();

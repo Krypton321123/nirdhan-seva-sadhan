@@ -6,6 +6,7 @@ export interface FormSubmissionInterface extends mongoose.Document {
     phone: string;
     address: string;
     purpose: string;
+    dob: string;
     isApproved: boolean;
     generatedId: string; // A unique ID for tracking the user
     imageURL: string,
@@ -24,6 +25,10 @@ const formSubmissionSchema = new mongoose.Schema<FormSubmissionInterface>({
     phone: {
         type: String,
         required: true
+    },
+    dob: {
+        type: String,
+        required: true,
     },
     address: {
         type: String,

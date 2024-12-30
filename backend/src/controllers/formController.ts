@@ -5,10 +5,10 @@ import {ApiError} from "../utils/apiError.js";
 import { Request, Response } from 'express'
 
 export const submitFormController = asyncHandler(async (req: Request, res: Response) => {
-    const { name, email, phone, address, purpose, generatedId } = req.body;
+    const { name, email, phone, address, dob, purpose, generatedId } = req.body;
 
     // Validate data
-    if (!name || !email || !phone || !address || !purpose || !generatedId) {
+    if (!name || !email || !phone || !address || !dob || !purpose || !generatedId) {
         return res.status(400).json(new ApiError(400, "All fields are required."));
     }
 
@@ -23,6 +23,7 @@ export const submitFormController = asyncHandler(async (req: Request, res: Respo
         name,
         email,
         phone,
+        dob,
         address,
         purpose,
         generatedId,
