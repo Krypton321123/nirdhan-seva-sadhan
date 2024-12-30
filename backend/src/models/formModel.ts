@@ -10,6 +10,7 @@ export interface FormSubmissionInterface extends mongoose.Document {
     isApproved: boolean;
     generatedId: string; // A unique ID for tracking the user
     imageURL: string,
+    userImageURL: string,
 }
 
 const formSubmissionSchema = new mongoose.Schema<FormSubmissionInterface>({
@@ -47,7 +48,11 @@ const formSubmissionSchema = new mongoose.Schema<FormSubmissionInterface>({
     },
     imageURL: {
         type: String,
-    }// UUID for tracking
+    },
+    userImageURL: {
+        type: String,
+        required: true,
+    }
 }, { timestamps: true });
 
 const formSubmissionModel = mongoose.model<FormSubmissionInterface>('FormSubmissions', formSubmissionSchema);

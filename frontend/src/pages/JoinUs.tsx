@@ -10,6 +10,7 @@ const JoinUs: React.FC = () => {
     dob: "",
     address: "",
     purpose: "",
+    image: null as File | null,
   });
   const [status, setStatus] = useState<"pending" | "approved" | null>(null);
   const [message, setMessage] = useState<string | null>(null);
@@ -43,7 +44,33 @@ const JoinUs: React.FC = () => {
 
   // Handle form input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+
+    if (e.target.type === "file") {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) validateImage(file);
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
+  };
+
+  // Validate and set image file
+  const validateImage = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (e: ProgressEvent<FileReader>) => {
+      const img = new Image();
+      img.onload = () => {
+        if (img.width < 100 || img.height < 100 || img.width > 500 || img.height > 500) {
+          setFormData((prev) => ({ ...prev, image: file }));
+          setError(null);
+        } else {
+          setError("Image must be exactly 100x100 pixels.");
+        }
+      };
+      img.onerror = () => setError("Invalid image file.");
+      if (e.target?.result) img.src = e.target.result as string;
+    };
+    reader.readAsDataURL(file);
   };
 
   // Handle form submission
@@ -53,9 +80,9 @@ const JoinUs: React.FC = () => {
     setMessage(null);
 
     // Validate form data
-    const { name, email, phone, address, purpose } = formData;
-    if (!name || !email || !phone || !address || !purpose) {
-      setError("All fields are required!");
+    const { name, email, phone, address, purpose, image } = formData;
+    if (!name || !email || !phone || !address || !purpose || !image) {
+      setError("All fields, including the image, are required!");
       return;
     }
 
@@ -69,15 +96,32 @@ const JoinUs: React.FC = () => {
     try {
       setLoading(true);
 
-      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/form/submit`, {
-        ...formData,
-        generatedId, // Send the unique ID to the backend
+      const formDataToSubmit = new FormData();
+      formDataToSubmit.append("name", name);
+      formDataToSubmit.append("email", email);
+      formDataToSubmit.append("phone", phone);
+      formDataToSubmit.append("dob", formData.dob);
+      formDataToSubmit.append("address", address);
+      formDataToSubmit.append("purpose", purpose);
+      formDataToSubmit.append("generatedId", generatedId);
+      formDataToSubmit.append("image", image);
+
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/form/submit`, formDataToSubmit, {
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       if (response.status === 201) {
         setMessage("Your registration form has been submitted successfully!");
         setStatus("pending"); // Mark as pending after submission
-        setFormData({ name: "", email: "", phone: "", dob: "", address: "", purpose: "" }); // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          dob: "",
+          address: "",
+          purpose: "",
+          image: null,
+        }); // Reset form
       } else {
         setError("Failed to submit the form. Please try again.");
       }
@@ -134,7 +178,9 @@ const JoinUs: React.FC = () => {
             </div>
           </div>
           <div className="bg-gray-50 p-8 rounded-lg shadow-lg">
-            <h2 className="text-3xl font-bold mb-6">REGISTRATION <span className="text-green-600">FORM</span></h2>
+            <h2 className="text-3xl font-bold mb-6">
+              REGISTRATION <span className="text-green-600">FORM</span>
+            </h2>
             {error && <p className="text-red-600 mb-4">{error}</p>}
             {message && <p className="text-green-600 mb-4">{message}</p>}
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -210,7 +256,18 @@ const JoinUs: React.FC = () => {
                     placeholder="Your purpose goes here..."
                 />
               </div>
-
+              <div>
+                <label className="block text-sm font-semibold mb-1" htmlFor="image">
+                  Upload Image (100x100)
+                </label>
+                <input
+                    type="file"
+                    id="image"
+                    accept="image/*"
+                    onChange={handleChange}
+                    className="w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-green-400"
+                />
+              </div>
               <button
                   type="submit"
                   className={`w-full bg-green-600 text-white py-2 rounded-lg font-semibold hover:bg-green-700 transition ${

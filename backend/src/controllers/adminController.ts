@@ -92,11 +92,11 @@ const adminCreateCampaignController = asyncHandler(
     
         if (file) {
           console.log("File received: ", file.path);
-          // Check if file exists
+
           const imagePath = path.join(__dirname, '../../uploads', file.filename);
           console.log("Image path to upload: ", imagePath);
     
-          // Check if file exists at the given path
+
           if (!fs.existsSync(imagePath)) {
             console.error("File not found at path:", imagePath);
             return res.status(400).json(new ApiError(400, "Image file not found"));
@@ -167,18 +167,18 @@ const adminCreateBlogController = asyncHandler(
   
         let imageUrl = "";
         if (file) {
-          // Construct full path to the uploaded file
+
           const imagePath = path.join(__dirname, "../../uploads", file.filename);
   
           try {
-            // Upload image to Cloudinary
+
             const result = await cloudinary.uploader.upload(imagePath, {
               folder: "blog_images",
             });
             imageUrl = result.secure_url;
             console.log(imageUrl)
   
-            // Delete file from server after uploading to Cloudinary
+
             fs.unlinkSync(imagePath);
           } catch (uploadError) {
             console.error("Error uploading image to Cloudinary", uploadError);
@@ -320,7 +320,8 @@ const approveForm = asyncHandler(async (req: Request, res: Response) => {
             form.imageURL = await generateIDcard({
                 name: form.name,
                 dob: form.dob,
-                address: form.address
+                address: form.address,
+                userImageURL: form.userImageURL
             });
         }
         console.log("Idhar aagaye 3")
@@ -445,7 +446,7 @@ export {
 
 
 
-const generateIDcard = async (userData: { name: string; dob: string; address: string }) => {
+const generateIDcard = async (userData: { name: string; dob: string; address: string, userImageURL: string }) => {
     const browser = await puppeteer.launch({
         args: ['--no-sandbox']
     });
@@ -454,80 +455,171 @@ const generateIDcard = async (userData: { name: string; dob: string; address: st
     console.log("Idhar aagaye 5")
 
     const html =`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>ID Card</title>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-
-    .id-card {
-            width: 380px;
-            border: 2px solid #333333;
-            border-radius: 10px;
-            background-color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            padding: 10px 15px;
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>ID Card</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f9;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
         }
     
-    .header {
-            background-color: #4caf50;
-            color: #ffffff;
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 18px;
-            font-weight: bold;
+        .id-card {
+          width: 380px;
+          border: 2px solid #333333;
+          border-radius: 10px;
+          background-color: #ffffff;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          position: relative;
+          overflow: hidden;
+          padding: 10px 15px;
         }
     
-    .highlight {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: #d32f2f;
-            margin: 15px 0;
+        .id-card::before {
+          content: "निर्धन सेवा संस्थान";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) rotate(-0deg);
+          font-size: 35px;
+          font-weight: bold;
+          color: rgba(0, 0, 0, 0.1); 
+          z-index: 0;
+          white-space: nowrap;
+          pointer-events: none;
         }
     
-    .details p {
-            margin: 5px 0;
-            font-size: 14px;
+        .id-card::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -40%);
+          width: 200px;
+          height: 200px;
+          background: url('https://res.cloudinary.com/dneswskog/image/upload/f_auto,q_auto/opru24oorgegr42fgcrn') no-repeat center center;
+          background-size: contain;
+          opacity: 0.1;
+          z-index: 0;
+          pointer-events: none;
         }
     
-    .footer {
-            text-align: center;
-            font-size: 12px;
-            color: #333333;
-            margin-top: 10px;
-            font-style: italic;
+        .header {
+          display: block;
+          background-color: #4caf50;
+          color: #ffffff;
+          padding: 5px 10px;
+          border-radius: 8px;
+          font-size: 18px;
+          font-weight: bold;
+          text-align: center;
+          position: relative;
+          z-index: 1;
         }
-        </style>
-        </head>
-        <body>
-        <div class="id-card">
-        <div class="header">Nirdhan Sewa Sansthan</div>
-        <div class="highlight">IDENTITY CARD</div>
+    
+        .header .sub-text {
+          font-size: 12px;
+          margin-top: 5px;
+          color: #ffffff;
+          font-weight: normal;
+        }
+    
+        .image-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin: 15px 0;
+          position: relative;
+          z-index: 1;
+        }
+    
+        .image-container img {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          border: 2px solid #333333;
+        }
+    
+        .highlight {
+          margin: 15px 0;
+          text-align: center;
+          font-size: 20px;
+          font-weight: bold;
+          color: #d32f2f;
+          position: relative;
+          z-index: 1;
+        }
+    
+        .details {
+          margin-top: 10px;
+          text-align: left;
+          font-size: 14px;
+          color: #333333;
+          position: relative;
+          z-index: 1;
+        }
+    
+        .details p {
+          margin: 5px 0;
+        }
+    
+        .details p span {
+          font-weight: bold;
+        }
+    
+        .footer {
+          margin-top: 15px;
+          font-size: 14px;
+          color: #333333;
+          font-weight: bold;
+          text-align: center;
+          position: relative;
+          z-index: 1;
+        }
+    
+        .footer .certified {
+          margin-top: 10px;
+          color: #4caf50;
+          font-style: italic;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="id-card">
+        <div class="header">
+          <div>Nirdhan Sewa Sansthan</div>
+          <div class="sub-text">ITA एवं नीति आयोग द्वारा अनुमोदित</div>
+        </div>
+     <div class="highlight">IDENTITY CARD</div>
+    
+        <div class="image-container">
+          <img src=${userData.userImageURL} alt="Profile Picture" />
+        </div>
+    
+       
+    
         <div class="details">
-            <p><strong>Name:</strong> ${userData.name}</p>
-        <p><strong>D.O.B:</strong> ${userData.dob}</p>
-        <p><strong>Valid Upto:</strong> 31-Dec-2026</p>
-        <p><strong>Address:</strong> ${userData.address}</p>
+          <p><span>Name:</span> ${userData.name}</p>
+          <p><span>D.O.B:</span> ${userData.dob}</p>
+          <p><span>Valid Upto:</span> 31-Dec-2026</p>
+          <p><span>Address:</span> ${userData.address}</p>
         </div>
-        <div class="footer">Empowering lives through trust and certification</div>
+    
+        <div class="footer">
+          <p>12A and 80G Certified</p>
+          <div class="certified">विश्वास और प्रमाणन के माध्यम से जीवन सशक्त बनाना</div>
         </div>
-        </body>
-        </html>
+      </div>
+    </body>
+    </html>
         `;
     await page.setContent(html);
     const screenshotBuffer = await page.screenshot(); //png id card
