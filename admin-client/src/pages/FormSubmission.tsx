@@ -78,9 +78,10 @@ const AdminFormRequests = () => {
                 {formRequests.map((form) => (
                     <div key={form._id} className="p-4 border rounded-lg shadow-lg space-y-4">
                         <h2 className="text-xl font-semibold">{form.name}</h2>
-                        <p>{form.email}</p>
-                        <p>{form.purpose}</p>
-                        <p>{form.address}</p>
+                        <p>EMAIL: {form.email}</p>
+                        <p>PURPOSE: {form.purpose}</p>
+                        <p>ADDRESS: {form.address}</p>
+                        <p>DOB: {form.dob}</p>
                         <div className="flex space-x-4">
                             {form.isApproved ? (
                                 <span className="text-green-600">Approved</span>
