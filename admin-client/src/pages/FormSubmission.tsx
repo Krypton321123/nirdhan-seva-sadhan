@@ -82,6 +82,7 @@ const AdminFormRequests = () => {
                         <p>PURPOSE: {form.purpose}</p>
                         <p>ADDRESS: {form.address}</p>
                         <p>DOB: {form.dob}</p>
+                        <img src={form.userImageURL}  alt={"Something"}/>
                         <div className="flex space-x-4">
                             {form.isApproved ? (
                                 <span className="text-green-600">Approved</span>
