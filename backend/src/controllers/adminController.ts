@@ -446,7 +446,9 @@ export {
 
 
 const generateIDcard = async (userData: { name: string; dob: string; address: string }) => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        args: ['--no-sandbox']
+    });
     const page = await browser.newPage();
 
     console.log("Idhar aagaye 5")
