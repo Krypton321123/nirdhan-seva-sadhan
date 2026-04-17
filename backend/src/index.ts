@@ -11,18 +11,21 @@ const start = async () => {
         await connectMongo();
 
 
-        const options = {
-            key: fs.readFileSync('/etc/letsencrypt/live/api.nirdhansewasansthan.com/privkey.pem'),
-            cert: fs.readFileSync('/etc/letsencrypt/live/api.nirdhansewasansthan.com/fullchain.pem')
-        };
+        // const options = {
+        //     key: fs.readFileSync('/etc/letsencrypt/live/api.nirdhansewasansthan.com/privkey.pem'),
+        //     cert: fs.readFileSync('/etc/letsencrypt/live/api.nirdhansewasansthan.com/fullchain.pem')
+        // };
 
         const port = parseInt(process.env.PORT as any) || 8000;
 
 
         const displayURL = `https://api.nirdhansewasansthan.com:${port}`;
-        https.createServer(options, app).listen(port, '0.0.0.0', () => {
-            console.log(`App listening on ${displayURL}`);
-        });
+        // https.createServer(options, app).listen(port, '0.0.0.0', () => {
+        //     console.log(`App listening on ${displayURL}`);
+        // });
+        app.listen(port, '0.0.0.0', () => {
+            console.log("listening on 8000")
+        }); 
 
     } catch (err) {
         console.log("Error starting the app" + err);

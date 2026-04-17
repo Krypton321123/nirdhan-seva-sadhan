@@ -1,4 +1,4 @@
-import express from 'express'; 
+import express, { Response, Request } from 'express'; 
 import cors from 'cors'
 import { adminRouter } from './routes/adminRouter.js';
 import cookieParser from 'cookie-parser'
@@ -16,6 +16,10 @@ app.use(cors({
 app.use(express.json()); 
 app.use(cookieParser()); 
 app.use(express.urlencoded({extended: true}))
+
+app.get('/health', async (req, res) => {
+    res.status(200).send("Healthy!"); 
+})
 
 
 app.use(`/api/admin`,adminRouter); 
