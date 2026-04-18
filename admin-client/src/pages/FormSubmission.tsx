@@ -101,6 +101,12 @@ const AdminFormRequests = () => {
                             >
                                 Reject
                             </button>
+                            <button
+                                onClick={() => handleReject(form._id)}
+                                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                            >
+                                Delete
+                            </button>
                         </div>
                     </div>
                 ))}
