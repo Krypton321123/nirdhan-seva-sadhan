@@ -11,7 +11,7 @@ const getCampaign = asyncHandler(async (req: Request, res: Response) => {
       const { id } = req.params;
         console.log("Int the get")
       
-      if (!mongoose.Types.ObjectId.isValid(id)) {
+      if (!mongoose.Types.ObjectId.isValid(id as string)) {
         return res.status(400).json(new ApiError(400, 'Invalid Campaign ID'));
       }
   

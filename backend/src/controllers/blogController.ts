@@ -71,7 +71,7 @@ const getBlogs = asyncHandler(async (req: Request, res: Response) => {
   
     try {
       // Validate the ID
-      if (!mongoose.Types.ObjectId.isValid(id)) {
+      if (!mongoose.Types.ObjectId.isValid(id as string)) {
         return res.status(400).json(new ApiError(400, "Invalid Blog ID")); 
       }
   
